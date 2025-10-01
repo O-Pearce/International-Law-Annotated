@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en" class="h-full bg-white" x-data="siteApp()">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>International Case Notes — International Legal Texts, Annotated</title>
+  <meta name="description" content="An open, collaborative platform where young lawyers annotate ICJ decisions." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    .card { transition: box-shadow .2s ease, transform .2s ease }
+    .card:hover { transform: translateY(-2px) }
+  </style>
+  <script>
+  function siteApp() {
+    return {
+      q: "",
+      cases: [
+        {
+          title: "Advisory Opinion — OPT",
+          subtitle: "Legal consequences of policies in the Occupied Palestinian Territory",
+          date: "2024-07-19",
+          tag: "Advisory Opinion",
+          href: "opt-opinion-pretty-authors-chips.html"
+        },
+        {
+          title: "Nicaragua v Germany",
+          subtitle: "Order on Provisional Measures",
+          date: "2024-04-30",
+          tag: "Order",
+          href: "nicaragua-germany-pretty-authors-chips.html"
+        }
+      ],
+      get filtered() {
+        const q = this.q.trim().toLowerCase();
+        const arr = [...this.cases].sort((a,b)=> (a.date < b.date ? 1 : -1));
+        if (!q) return arr;
+        return arr.filter(c => (c.title + " " + c.subtitle + " " + c.tag).toLowerCase().includes(q));
+      },
+      year(d) {
+        return new Date(d).getFullYear();
+      }
+    }
+  }
+  </script>
+</head>
+<body class="min-h-full text-neutral-900">
+  <!-- Header -->
+  <header class="sticky top-0 z-40 backdrop-blur bg-white/90 border-b border-neutral-200">
+    <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="h-8 w-8 rounded-xl bg-neutral-900 text-white grid place-items-center text-xs">ICN</div>
+        <div class="font-semibold tracking-tight">International Case Notes</div>
+      </div>
+      <nav class="hidden md:flex items-center gap-6 text-sm text-neutral-700">
+        <a href="#about" class="hover:underline">About</a>
+        <a href="#cases" class="hover:underline">Cases</a>
+        <a href="#contribute" class="hover:underline">Contribute</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="mx-auto max-w-6xl px-4 py-28 text-center">
+    <h1 class="text-5xl md:text-6xl font-bold tracking-tight">International Legal Texts — Annotated</h1>
+    <p class="mt-8 text-lg text-neutral-600">
+      An open, collaborative project where young public international law practitioners add short, sharp context to key paragraphs —
+      like <em>Genius</em>, but for international law.
+    </p>
+    <div class="mt-6 flex items-center justify-center gap-3">
+      <a href="#cases" class="px-6 py-3 rounded-lg bg-neutral-900 text-white">Start exploring</a>
+      <a href="#contribute" class="px-6 py-3 rounded-lg border border-neutral-300">Become a contributor</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="mx-auto max-w-4xl px-4 py-16">
+    <h2 class="text-2xl font-semibold mb-3">What is this?</h2>
+    <p class="text-neutral-700 leading-relaxed">
+      We’re building a clean, plain English layer of commentary on top of international legal texts. Each case page mirrors the original structure and
+      allows readers to hover on paragraph numbers to see brief annotations — doctrine, context, and critiques — authored by a small,
+      global network of early-career public international lawyers.
+    </p>
+    <p class="text-neutral-700 leading-relaxed mt-3">
+      Our goals are clarity, accessibility, and scholarly usefulness. This is a community project: annotations are concise,
+      sourced, and signed by their authors, but should not be regarded as thoroughly peer-reviewed.
+    </p>
+  </section>
+
+  <!-- Case Index -->
+  <section id="cases" class="mx-auto max-w-6xl px-4 py-20">
+    <div class="flex items-end justify-between gap-4">
+      <h2 class="text-2xl font-semibold">Cases</h2>
+      <div class="flex-1 md:flex-none md:w-80">
+        <input x-model="q" type="search" placeholder="Search cases…"
+               class="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm" />
+      </div>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+      <template x-for="c in filtered" :key="c.href">
+        <a :href="c.href" class="card p-5 border rounded-xl hover:shadow-md bg-white">
+          <div class="text-xs uppercase tracking-wide text-neutral-500" x-text="c.tag + ' • ' + year(c.date)"></div>
+          <div class="mt-1 font-semibold" x-text="c.title"></div>
+          <div class="text-sm text-neutral-600 mt-1" x-text="c.subtitle"></div>
+          <div class="mt-4 text-sm text-neutral-500">Open annotations →</div>
+        </a>
+      </template>
+    </div>
+  </section>
+
+  <!-- Contribute -->
+  <section id="contribute" class="mx-auto max-w-4xl px-4 py-28">
+    <h2 class="text-2xl font-semibold mb-3">Become a Contributor</h2>
+    <p class="text-neutral-700 leading-relaxed mb-4">
+      We welcome concise annotations from early-career PIL lawyers and advanced students across jurisdictions.
+      Introduce yourself below and we’ll be in touch.
+    </p>
+    <!-- Google Form embed: replace the FORM_ID with your own live form ID -->
+    <div class="rounded-xl border border-neutral-200 overflow-hidden">
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSdByoawa9IqxIOTEiOPM7uyLppjCJ1npaYuJ9eLdhB8Qma_dw/viewform?usp=dialog"
+        width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    </div>
+    <p class="text-xs text-neutral-500 mt-2">
+      Tip: In Google Forms, use “Collect email addresses” to ensure we can reach you.
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-neutral-200">
+    <div class="mx-auto max-w-6xl px-4 py-8 text-sm text-neutral-600">
+      <div>© <span x-text="new Date().getFullYear()"></span> International Case Notes</div>
+      <div class="mt-1">For educational use • Not affiliated with the ICJ</div>
+    </div>
+  </footer>
+</body>
+</html>
