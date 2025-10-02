@@ -18,28 +18,28 @@
     .hl { background: rgba(250, 204, 21, .25); }
   .dim { opacity:.55; color: rgb(115 115 115); }
 </style>
-<script src="nicaragua-germany-notes.js?v=2"></script>
+<script src="nicaragua-germany-notes.js"></script>
 <script>
-  window.NOTES = window.NOTES || {};
-  window.AUTHORS = Array.from(new Set(
-    Object.values(window.NOTES).flat().map(n => (n.author||'').trim()).filter(Boolean)
+  const AUTHORS = Array.from(new Set(
+    Object.values(NOTES).flat().map(n => (n.author||'').trim()).filter(Boolean)
   )).sort();
 </script>
-
-<script>
+  
+  <script>
 
 function icjApp() {
   return {
+    // Multi-select authors
     selectedAuthors: new Set(),
-    authors: (Array.isArray(window.AUTHORS) ? window.AUTHORS : []),
+    authors: AUTHORS,
 
     htmlFor(id) {
-      const list = (window.NOTES && window.NOTES[id]) ? window.NOTES[id] : [];
+      const list = NOTES[id] || [];
       const hasFilter = this.selectedAuthors.size > 0;
       const filtered = hasFilter ? list.filter(n => this.selectedAuthors.has((n.author || '').trim())) : list;
       if (!filtered.length) return '<div class="text-sm text-neutral-500">No notes yet.</div>';
       return filtered.map(n => {
-        let h = '';
+        var h = '';
         h += '<div class="note-card p-3 rounded-xl bg-neutral-50 border border-neutral-200 mb-2">';
         if (n.author) h += '<div class="text-[11px] tracking-wide text-neutral-600 mb-1">By ' + n.author + '</div>';
         if (n.title)  h += '<div class="font-semibold mt-0.5">' + n.title + '</div>';
@@ -51,12 +51,7 @@ function icjApp() {
     },
 
     _tippies: [],
-
-    init() {
-      this.refreshPopovers();
-      this.applyHighlights();
-      this.handleHashOnLoad();
-    },
+    init() { this.refreshPopovers(); this.applyHighlights(); this.handleHashOnLoad(); },
 
     refreshPopovers() {
       this._tippies.forEach(t => t.destroy()); this._tippies = [];
@@ -71,37 +66,56 @@ function icjApp() {
       });
     },
 
+    // Highlight logic per requirements
     applyHighlights() {
-      // Clear all state
-      const allParas = Array.from(document.querySelectorAll('[id^="para-"]'));
-      allParas.forEach(w => w.classList.remove('hl', 'dim'));
-      const allIds = allParas.map(el => el.id);
+  // Clear all state
+  document.querySelectorAll('[id^="para-"]').forEach(w => w.classList.remove('hl', 'dim'));
 
-      // No filter selected → highlight every para that has any notes; do not dim others
-      if (this.selectedAuthors.size === 0) {
-        allIds.forEach(id => {
-          const notes = (window.NOTES && window.NOTES[id]) ? window.NOTES[id] : [];
-          if (notes.length > 0) {
-            const w = document.getElementById(id);
-            if (w) w.classList.add('hl');
-          }
-        });
+  const allParas = Array.from(document.querySelectorAll('[id^="para-"]'));
+  const allIds = allParas.map(el => el.id);
+
+  // No filter selected → highlight every para that has any notes; do not dim others
+  if (this.selectedAuthors.size === 0) {
+    allIds.forEach(id => {
+      const notes = NOTES[id] || [];
+      if (notes.length > 0) {
+        const w = document.getElementById(id);
+        if (w) w.classList.add('hl');
+      }
+    });
+    return;
+  }
+
+  // Filter mode → dim everything by default
+  allParas.forEach(w => w.classList.add('dim'));
+
+  // Then undim + highlight paras with notes by any selected author(s)
+  allIds.forEach(id => {
+    const notes = (NOTES[id] || []);
+    const hasSelected = notes.some(n => this.selectedAuthors.has((n.author || '').trim()));
+    if (hasSelected) {
+      const w = document.getElementById(id);
+      if (w) {
+        w.classList.add('hl');
+        w.classList.remove('dim');
+      }
+    }
+  });
+});
         return;
       }
 
-      // Filter mode → dim everything by default
-      allParas.forEach(w => w.classList.add('dim'));
-
-      // Then undim + highlight paras with notes by any selected author(s)
+      // With filter: add hl if para has a note by any selected author; else dim
       allIds.forEach(id => {
-        const notes = (window.NOTES && window.NOTES[id]) ? window.NOTES[id] : [];
+        const notes = NOTES[id] || [];
         const hasSelected = notes.some(n => this.selectedAuthors.has((n.author || '').trim()));
+        const w = document.getElementById(id);
+        if (!w) return;
         if (hasSelected) {
-          const w = document.getElementById(id);
-          if (w) {
-            w.classList.add('hl');
-            w.classList.remove('dim');
-          }
+          w.classList.add('hl');
+          w.classList.remove('dim');
+        } else {
+          w.classList.add('dim');
         }
       });
     },

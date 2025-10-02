@@ -1,10 +1,15 @@
-// Notes file generated from page. Add more annotations using addNote(...)
+// Cleaned notes file. Add more using the same one-line format:
+/*
+  addNote("para-123", "Author Name", "Short note text", "Optional title", "Optional source");
+*/
 const NOTES = {};
 function addNote(para, author, text, title="", source="") {
   if (!NOTES[para]) NOTES[para] = [];
   NOTES[para].push({ author, title, text, source });
 }
 
+addNote("para-2", "Jane Doe", "Test", "", "");
+addNote("para-3", "Jane Doe", "Test", "", "");
 addNote("para-2", "Oscar Pearce", "Note that Nicaragua has not strictly limited its claims to violations arising out of the post-October 7 2023 conflict. Rather, as is even more explicit in their application instituting proceedings, they consider Germany's pre-2023 support for Israel to also be unlawful. This position has been lended greater weight by the Advisory Opinion issued by the Court months later finding that Israel had perpetrated - and was continuing to perpetrate - various IHRL and IHL violations in the Occupied Palestinian Territory.", "", "");
 addNote("para-15", "Oscar Pearce", "It is notable that Germany here does not take the stronger position that Common Article 1 of the Geneva Conventions creates NO obligations with respect to other states. Those that adopt that more radical stance contend that the duty to ensure respect for IHL extends only to those under a state's direct influence (ie, individuals, corporations, etc).", "", "");
 addNote("para-18", "Oscar Pearce", "This decrease in exports from Germany reversed in the aftermath of this decision, which could undermine Germany's case at the merits stage of these proceedings. See Judge Tladi's declaration, and this article: https://www.justsecurity.org/114479/german-arms-exports-israel-icj/.", "", "");
