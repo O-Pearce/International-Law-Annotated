@@ -18,16 +18,9 @@
     .hl { background: rgba(250, 204, 21, .25); }
   </style>
 <script>
-  <script src="opt-advisory-opinion-notes.js"></script>
-<script>
-  const AUTHORS = Array.from(new Set(
-    Object.values(NOTES).flat().map(n => (n.author||"").trim()).filter(Boolean)
-  )).sort();
-</script>
-
-  
-  <script>
-function icjApp() {
+  const NOTES = {"para-90": [{"author": "Oscar Pearce", "title": "", "text": "This paragraph expresses the traditional test for applying the law of occupation. Even here, however, the phrase \"to the extent that\" a state exercises effective control signals the shift to functional interpretation below.", "source": ""}], "para-92": [{"author": "Oscar Pearce", "title": "", "text": "The latter half of this paragraph reflects a shift towards the 'Functional Approach' to the law of occupation, supported by the ICRC and various academic/NGO commentators.", "source": ""}], "para-274": [{"author": "Oscar Pearce", "title": "", "text": "It is notable, and perhaps disappointing that the Court framed this analysis in terms of  erga omnes  obligations rather than  jus cogens . See Judge Tladi's separate opinion for the argument that these consequences are properly attached to the latter.", "source": ""}], "para-278": [{"author": "Oscar Pearce", "title": "", "text": "Where the next paragraph seems to draw on the duty in Article 41 of the ILC's Draft Articles on the Responsibility of States for Internationally Wrongful Acts, this paragraph instead echoes the obligations customarily associated with the specific prohibition on the acquisition of territory by force.", "source": ""}], "para-279": [{"author": "Oscar Pearce", "title": "", "text": "Though the Court refrained from explicitly invoking it, these obligations seem to fit Article 41 of the ILC's Draft Articles on the Responsibility of States for Internationally Wrongful Act. Note that this provision applies to serious violations of peremptory norms.", "source": ""}]};
+  const AUTHORS = ["Oscar Pearce"];
+  function icjApp() {
     return {
       activeAuthor: '',
       authors: AUTHORS,
