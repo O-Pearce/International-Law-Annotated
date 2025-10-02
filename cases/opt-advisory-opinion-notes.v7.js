@@ -1,13 +1,9 @@
-// Cleaned notes file. Add more using the same one-line format:
-/*
-  addNote("para-123", "Author Name", "Short note text", "Optional title", "Optional source");
-*/
-const NOTES = {};
+// v6 notes header: attach to window, avoid const-scoped globals
+window.NOTES = window.NOTES || {};
 function addNote(para, author, text, title="", source="") {
-  if (!NOTES[para]) NOTES[para] = [];
-  NOTES[para].push({ author, title, text, source });
+  if (!window.NOTES[para]) window.NOTES[para] = [];
+  window.NOTES[para].push({ author, title, text, source });
 }
-
 addNote("para-2", "Jane Doe", "Test", "", "");
 addNote("para-90", "Jane Doe", "Test", "", "");
 addNote("para-92", "Oscar Pearce", "The latter half of this paragraph reflects a shift towards the 'Functional Approach' to the law of occupation, supported by the ICRC and various academic/NGO commentators. See, in particular, 'The Writing on the Wall', Aeyal Gross (CUP, 2017), and Gross's response to this opinion: https://www.google.com/search?client=safari&rls=en&q=functional+approach+lex+lata&ie=UTF-8&oe=UTF-8.", "", "");
@@ -20,3 +16,9 @@ addNote("para-278", "Oscar Pearce", "Where the next paragraph seems to draw on t
 addNote("para-279", "Oscar Pearce", "Though the Court refrained from explicitly invoking it, these obligations seem to fit Article 41 of the ILC's Draft Articles on the Responsibility of States for Internationally Wrongful Act. Note that this provision applies to serious violations of peremptory norms.", "", "");
 addNote("para-281", "Oscar Pearce", "To this end, the UN General Assembly passed a resolution acknowledging and affirming the Court's Opinion while calling for further specific measures, including states 'taking steps towards ceasing' any trade in arms and products originating in Israeli settlements. See https://www.un.org/unispal/document/ga-10th-ess-resolution-18sep24/", "", "");
 addNote("para-285", "Oscar Pearce", "Vice-President Sebutinde - the most resounding dissenting voice in this Opinion - has since attracted controversy for her comment that '[t]he Lord is counting on me to stand on the side of Israel'. See https://www.aljazeera.com/news/2025/8/27/why-icj-judge-sebutinde-faces-calls-to-quit-from-israel-genocide-case.", "", "");
+
+
+
+console.log('✅ notes loaded', Object.keys(window.NOTES));
+
+;(function(){ window.NOTES_READY = true; window.dispatchEvent(new Event('notes:ready')); })();

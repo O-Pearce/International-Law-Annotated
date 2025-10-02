@@ -16,22 +16,25 @@
     .note-card { max-width: 380px }
     .tippy-box { border-radius: 12px; }
     .hl { background: rgba(250, 204, 21, .25); }
-  .dim { opacity:.55; color: rgb(115 115 115); }
-</style>
-<script src="nicaragua-germany-notes.js?v=2"></script>
-<script>
-  window.NOTES = window.NOTES || {};
-  window.AUTHORS = Array.from(new Set(
-    Object.values(window.NOTES).flat().map(n => (n.author||'').trim()).filter(Boolean)
-  )).sort();
+  </style>
+<script src="nicaragua-germany-notes.v7.js" defer></script>
+<script defer>
+  // Build AUTHORS once notes are ready
+  function computeAuthors(){
+    window.AUTHORS = Array.from(new Set(
+      Object.values(window.NOTES || {}).flat().map(n => (n.author||'').trim()).filter(Boolean)
+    )).sort();
+  }
+  if (window.NOTES && Object.keys(window.NOTES).length) { computeAuthors(); }
+  window.addEventListener('notes:ready', computeAuthors, { once: true });
 </script>
 
 <script>
-
+  
 function icjApp() {
   return {
     selectedAuthors: new Set(),
-    authors: (Array.isArray(window.AUTHORS) ? window.AUTHORS : []),
+    authors: [],
 
     htmlFor(id) {
       const list = (window.NOTES && window.NOTES[id]) ? window.NOTES[id] : [];
@@ -53,9 +56,19 @@ function icjApp() {
     _tippies: [],
 
     init() {
-      this.refreshPopovers();
-      this.applyHighlights();
-      this.handleHashOnLoad();
+      const run = () => {
+        // Pull authors from global after notes are computed
+        this.authors = Array.isArray(window.AUTHORS) ? window.AUTHORS : [];
+        this.refreshPopovers();
+        this.applyHighlights();
+        this.handleHashOnLoad();
+      };
+      if (!window.NOTES || Object.keys(window.NOTES).length === 0) {
+        const once = () => { window.removeEventListener('notes:ready', once); run(); };
+        window.addEventListener('notes:ready', once);
+      } else {
+        run();
+      }
     },
 
     refreshPopovers() {
@@ -72,12 +85,10 @@ function icjApp() {
     },
 
     applyHighlights() {
-      // Clear all state
-      const allParas = Array.from(document.querySelectorAll('[id^="para-"]'));
+      const allParas = Array.from(document.querySelectorAll('[id^=\"para-\"]'));
       allParas.forEach(w => w.classList.remove('hl', 'dim'));
       const allIds = allParas.map(el => el.id);
 
-      // No filter selected → highlight every para that has any notes; do not dim others
       if (this.selectedAuthors.size === 0) {
         allIds.forEach(id => {
           const notes = (window.NOTES && window.NOTES[id]) ? window.NOTES[id] : [];
@@ -89,19 +100,14 @@ function icjApp() {
         return;
       }
 
-      // Filter mode → dim everything by default
       allParas.forEach(w => w.classList.add('dim'));
 
-      // Then undim + highlight paras with notes by any selected author(s)
       allIds.forEach(id => {
         const notes = (window.NOTES && window.NOTES[id]) ? window.NOTES[id] : [];
         const hasSelected = notes.some(n => this.selectedAuthors.has((n.author || '').trim()));
         if (hasSelected) {
           const w = document.getElementById(id);
-          if (w) {
-            w.classList.add('hl');
-            w.classList.remove('dim');
-          }
+          if (w) { w.classList.add('hl'); w.classList.remove('dim'); }
         }
       });
     },
