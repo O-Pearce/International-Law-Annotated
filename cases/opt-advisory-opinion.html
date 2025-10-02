@@ -17,8 +17,13 @@
     .tippy-box { border-radius: 12px; }
     .hl { background: rgba(250, 204, 21, .25); }
   </style>
+<script src="opt-advisory-opinion-notes.js"></script>
 <script>
-  <script src="opt-advisory-opinion-notes.js"></script>
+  const AUTHORS = Array.from(new Set(
+    Object.values(NOTES).flat().map(n => (n.author||'').trim()).filter(Boolean)
+  )).sort();
+</script>
+
 <script>
   const AUTHORS = Array.from(new Set(
     Object.values(NOTES).flat().map(n => (n.author||"").trim()).filter(Boolean)
