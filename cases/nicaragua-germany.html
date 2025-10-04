@@ -24,6 +24,14 @@
 .title-chip--dark { @apply bg-neutral-900 text-white border-neutral-900; }
   .sc { font-variant: small-caps; letter-spacing: .02em; }
   .hang { padding-left: 11ch; text-indent: -11ch; }
+  /* Classic hanging indent for numbered paragraphs like "1. ..." */
+  .hang-num { padding-left: 3ch; text-indent: -3ch; }
+
+  /* Nice readable flow + automatic hyphenation to mimic print wraps */
+  .legal-flow { line-height: 1.7; hyphens: auto; }
+
+  /* Indented preamble block (adjust ch to taste) */
+  .preamble { padding-left: 4ch; }
   </style>
 <script src="nicaragua-germany-notes.v7.js" defer></script>
 <script defer>
@@ -188,17 +196,19 @@ function icjApp() {
              bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-600
              [word-spacing:0.02em]">
     <!-- Keep your exact title text (no casing changes) -->
-Alleged Breaches of Certain International Obligations in Respect of the Occupied Palestinian Territory (Nicaragua v. Germany) — Request for the Indication of Provisional Measures (30 APRIL 2024)  </h1>
+Alleged Breaches of Certain International Obligations in Respect of the Occupied Palestinian Territory (Nicaragua v. Germany) — Request for the Indication of Provisional Measures (30 APRIL 2024) </h1>
 
   <div id="justices-line" class="mt-3 text-sm text-neutral-600"></div>
 </section>
 
 
-<p>The International Court of Justice,</p>
-<p>Composed as above,</p>
-<p>After deliberation,</p>
-<p>Having regard to Articles 41 and 48 of the Statute of the Court and Articles 73, 74 and 75 of the Rules of Court,</p>
-<p><em>Makes the following Order:</em></p>
+<div class="preamble legal-flow max-w-prose space-y-3 mb-3">
+  <p>The International Court of Justice,</p>
+  <p>Composed as above,</p>
+  <p>After deliberation,</p>
+  <p>Having regard to Articles 41 and 48 of the Statute of the Court and Articles 73, 74 and 75 of the Rules of Court,</p>
+  <p><em>Makes the following Order:</em></p>
+</div>
 
 <div id="para-1">
 <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
