@@ -171,21 +171,35 @@ html, body { scroll-padding-top: var(--sticky-offset); }
 
 <body class="min-h-full text-neutral-900" x-init="init()">
 <header class="sticky top-0 z-40 backdrop-blur bg-white/90 border-b border-neutral-200">
-<div class="mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
-<div class="flex items-center gap-3">
-<a class="h-7 w-7 rounded-xl bg-neutral-900 text-white grid place-items-center text-xs" href="../index.html"> ILA </a>
-<div class="font-semibold tracking-tight">Nicaragua v Germany — Provisional Measures</div>
-</div>
-<div class="flex items-center gap-2">
-<span class="text-sm text-neutral-600">Authors:</span>
-<template :key="a" x-for="a in authors">
-<button :class="isActive(a) ? 'bg-neutral-900 text-white border-neutral-900' : 'bg-white hover:bg-neutral-100 border-neutral-300 text-neutral-700'" @click="toggleAuthor(a)" class="px-2.5 py-1 rounded-full border text-sm transition">
-<span x-text="a"></span>
-</button>
-</template>
-<button @click="resetAuthors()" class="ml-2 text-sm underline text-neutral-600">Reset</button>
-</div>
-</div>
+  <div class="mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
+    <!-- add min-w-0 so the title can actually truncate -->
+    <div class="flex items-center gap-3 min-w-0">
+      <!-- add shrink-0 so the logo never squishes -->
+      <a class="h-7 w-7 shrink-0 rounded-xl bg-neutral-900 text-white grid place-items-center text-xs"
+         href="../index.html"> ILA </a>
+
+      <!-- add flex-1 min-w-0 truncate and an id for the script -->
+      <div id="hdr-title"
+           class="font-semibold tracking-tight flex-1 min-w-0 truncate">
+        Nicaragua v Germany
+      </div>
+    </div>
+
+    <!-- give the authors row an id; no breakpoint classes -->
+    <div id="hdr-authors" class="flex items-center gap-2">
+      <span class="text-sm text-neutral-600">Authors:</span>
+      <template x-for="a in authors" :key="a">
+        <button
+          class="px-2.5 py-1 rounded-full border text-sm transition
+                 hover:bg-neutral-100 text-neutral-700 border-neutral-300"
+          :class="isActive(a) ? 'bg-neutral-900 text-white border-neutral-900' : ''"
+          @click="toggleAuthor(a)">
+          <span x-text="a"></span>
+        </button>
+      </template>
+      <button @click="resetAuthors()" class="ml-2 text-sm underline text-neutral-600">Reset</button>
+    </div>
+  </div>
 </header>
 <main class="mx-auto max-w-5xl px-4 py-8 prose prose-neutral">
 <div class="relative">
@@ -697,6 +711,47 @@ function jumpFirstNote(opts){
   window.addEventListener('resize', place);
   window.addEventListener('noteMap:update', place);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+})();
+</script>
+<script>
+(function dynamicAuthorsVisibility(){
+  var title   = document.getElementById('hdr-title');
+  var authors = document.getElementById('hdr-authors');
+  if (!title || !authors) return;
+
+  function update(){
+    // ensure visible for a correct measurement
+    authors.classList.remove('hidden');
+    authors.classList.add('flex');
+
+    // ellipsis/truncation detection
+    var truncated = title.scrollWidth > title.clientWidth;
+
+    // hide only if the title would truncate with authors present
+    authors.classList.toggle('hidden', truncated);
+    authors.classList.toggle('flex', !truncated);
+    authors.setAttribute('aria-hidden', truncated ? 'true' : 'false');
+  }
+
+  // run and keep in sync with layout changes
+  var raf;
+  function queued(){ if (raf) cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }
+
+  window.addEventListener('load', queued);
+  window.addEventListener('resize', queued);
+
+  // react to header/content size changes
+  if (window.ResizeObserver){
+    var ro = new ResizeObserver(queued);
+    ro.observe(document.getElementById('site-header') || document.body);
+    ro.observe(title);
+  }
+
+  // wait for fonts (width can change when fonts load)
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(queued);
+
+  // initial
+  queued();
 })();
 </script>
 
