@@ -20,10 +20,6 @@
   opacity: 0.35;                /* fades non-selected paragraphs */
   transition: opacity 0.2s ease;
 }
-.title-chip { @apply px-2.5 py-1 rounded-full text-xs border border-neutral-300 text-neutral-700 bg-white; }
-.title-chip--dark { @apply bg-neutral-900 text-white border-neutral-900; }
-  .sc { font-variant: small-caps; letter-spacing: .02em; }
-  .hang { padding-left: 11ch; text-indent: -11ch; }
   </style>
 <script src="nicaragua-germany-notes.v7.js" defer></script>
 <script defer>
@@ -36,7 +32,6 @@
   if (window.NOTES && Object.keys(window.NOTES).length) { computeAuthors(); }
   window.addEventListener('notes:ready', computeAuthors, { once: true });
 </script>
-<meta name="justices" content="President Salam; Vice-President Sebutinde; Judges Tomka, Abraham, Yusuf, Xue, Bhandari, Iwasawa, Nolte, Charlesworth, Brant, Gómez Robledo, Cleveland, Aurescu, Tladi; Judge ad hoc Al-Khasawneh; Registrar Gautier">
 
 <script>
   
@@ -176,30 +171,14 @@ function icjApp() {
 </div>
 </header>
 <main class="mx-auto max-w-5xl px-4 py-8 prose prose-neutral">
-<section class="mb-8 border-b border-neutral-200 pb-5">
-  <div class="text-[11px] uppercase tracking-[0.22em] text-neutral-500 mb-2">
-    International Law Annotated
-  </div>
-
-  <h1 id="page-title"
-      class="text-balance font-extrabold tracking-tight leading-[1.15]
-             text-[clamp(1.6rem,3.5vw,2.75rem)]
-             md:text-[clamp(1.9rem,2.6vw,3.2rem)]
-             bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-600
-             [word-spacing:0.02em]">
-    <!-- Keep your exact title text (no casing changes) -->
-Alleged Breaches of Certain International Obligations in Respect of the Occupied Palestinian Territory (Nicaragua v. Germany) — Request for the Indication of Provisional Measures (30 APRIL 2024)  </h1>
-
-  <div id="justices-line" class="mt-3 text-sm text-neutral-600"></div>
-</section>
-
-
+<h1 class="!mb-2">ALLEGED BREACHES OF CERTAIN INTERNATIONAL OBLIGATIONS IN RESPECT OF THE OCCUPIED PALESTINIAN TERRITORY (NICARAGUA V. GERMANY) REQUEST FOR THE INDICATION OF PROVISIONAL MEASURES (30 APRIL 2024)</h1>
+<p>Present: President Salam; Vice-President Sebutinde; Judges Tomka, Abraham, Yusuf, Xue, Bhandari, Iwasawa, Nolte, Charlesworth, Brant, Gómez Robledo, Cleveland, Aurescu, Tladi; Judge ad hoc Al-Khasawneh; Registrar Gautier.</p>
 <p>The International Court of Justice,</p>
 <p>Composed as above,</p>
 <p>After deliberation,</p>
-<p>Having regard to Articles 41 and 48 of the Statute of the Court and Articles 73, 74 and 75 of the Rules of Court,</p>
-<p><em>Makes the following Order:</em></p>
-
+<p>Having regard to Articles 41 and 48 of the Statute of the Court and</p>
+<p>Articles 73, 74 and 75 of the Rules of Court,</p>
+<p>Makes the following Order:</p>
 <div id="para-1">
 <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
 <button @click.prevent="copyLink('para-1')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-1" title="Copy link; hover/click for notes">[1]</button>
@@ -351,128 +330,16 @@ Alleged Breaches of Certain International Obligations in Respect of the Occupied
 </div>
 </div>
 <div id="para-26">
-  <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
-    <button
-      @click.prevent="copyLink('para-26')"
-      class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50"
-      data-para="para-26"
-      title="Copy link; hover/click for notes"
-    >[26]</button>
-
-    <!-- content column -->
-    <div class="leading-relaxed space-y-2">
-      <p>For these reasons,</p>
-      <p class="sc">THE COURT,</p>
-      <p>By fifteen votes to one,</p>
-
-      <p>
-        <em>Finds</em> that the circumstances, as they now present themselves to the Court,
-        are not such as to require the exercise of its power under Article&nbsp;41 of the
-        Statute to indicate provisional measures.
-      </p>
-
-      <p class="hang">
-        <span class="sc">IN FAVOUR:</span>
-        <em>President</em> Salam; <em>Vice-President</em> Sebutinde;
-        <em>Judges</em> Tomka, Abraham, Yusuf, Xue, Bhandari, Iwasawa, Nolte, Charlesworth,
-        Brant, Gómez Robledo, Cleveland, Aurescu, Tladi;
-      </p>
-
-      <p class="hang">
-        <span class="sc">AGAINST:</span>
-        <em>Judge ad hoc</em> Al-Khasawneh.
-      </p>
-
-      <p>
-        Done in French and in English, the French text being authoritative, at the Peace
-        Palace, The Hague, this thirtieth day of April, two thousand and twenty-four, in
-        three copies, one of which will be placed in the archives of the Court and the
-        others transmitted to the Government of the Republic of Nicaragua and the
-        Government of the Federal Republic of Germany, respectively.
-      </p>
-
-      <div class="text-center space-y-2 mt-3">
-        <p><em>(Signed)</em> Nawaf <span class="sc">Salam</span>,<br>President.</p>
-        <p><em>(Signed)</em> Philippe <span class="sc">Gautier</span>,<br>Registrar.</p>
-      </div>
-
-      <p class="mt-2">
-        Vice-President <span class="sc">Sebutinde</span> appends a separate opinion to the
-        Order of the Court; Judge <span class="sc">Iwasawa</span> appends a separate opinion
-        to the Order of the Court; Judges <span class="sc">Cleveland</span> and
-        <span class="sc">Tladi</span> append declarations to the Order of the Court; Judge
-        <em>ad hoc</em> <span class="sc">Al-Khasawneh</span> appends a dissenting opinion to
-        the Order of the Court.
-      </p>
-
-      <div class="text-right italic space-y-1">
-        <p>(Initialled) N.S.</p>
-        <p>(Initialled) Ph.G.</p>
-      </div>
-    </div>
-  </div>
+<div class="grid grid-cols-[6ch_1fr] items-start gap-3">
+<button @click.prevent="copyLink('para-26')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-26" title="Copy link; hover/click for notes">[26]</button>
+<p>For these reasons, <br/>The Court, <br/>By fifteen votes to one, <br/>Finds that the circumstances, as they now present themselves to the Court, are not such as to require the exercise of its power under Article 41 of the Statute to indicate provisional measures. <br/>IN FAVOUR: President Salam; Vice-President Sebutinde; Judges Tomka, Abraham, Yusuf, Xue, Bhandari, Iwasawa, Nolte, Charlesworth, Brant, Gómez Robledo, Cleveland, Aurescu, Tladi; <br/>AGAINST: Judge ad hoc Al-Khasawneh. <br/>Done in French and in English, the French text being authoritative, at the Peace Palace, The Hague, this thirtieth day of April, two thousand and twenty-four, in three copies, one of which will be placed in the archives of the Court and the others transmitted to the Government of the Republic of Nicaragua and the Government of the Federal Republic of Germany, respectively. <br/>(Signed) Nawaf Salam, President. <br/>(Signed) Philippe Gautier, Registrar. <br/>Vice-President Sebutinde appends a separate opinion to the Order of the Court; Judge Iwasawa appends a separate opinion to the Order of the Court; Judges Cleveland and Tladi append declarations to the Order of the Court; Judge ad hoc Al-Khasawneh appends a dissenting opinion to the Order of the Court. <br/>(Initialled) N.S. <br/>(Initialled) Ph.G.</p>
 </div>
-
+</div>
 <hr class="my-10"/>
 <div class="text-sm text-neutral-500">
 <strong>How to read:</strong> Hover/click the <span class="px-1 py-0.5 border rounded">[¶]</span> badge for notes.
       Use the author chips to toggle highlights and filter tooltips. Reset to show all authors.
     </div>
 </main>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const h = document.getElementById('page-title');
-  if (h) {
-    // Keep your title exactly as authored; only tweak rhythm for very long strings
-    const len = h.textContent.trim().length;
-    if (len > 120) {
-      h.style.letterSpacing = '-0.01em';
-      h.style.lineHeight = '1.12';
-    }
-    if (len > 180) {
-      // For extremely long titles, nudge font size down slightly
-      h.style.fontSize = 'clamp(1.5rem, 3.0vw, 2.5rem)';
-    }
-  }
-
-  // ---- Justices line (meta first, then fallback list) ----
-  const meta = document.querySelector('meta[name="justices"]');
-  let justices = meta?.content?.trim();
-  if (!justices) {
-    const list = document.querySelector('#justices-present');
-    if (list) {
-      justices = Array.from(list.querySelectorAll('li'))
-        .map(li => li.textContent.trim())
-        .filter(Boolean)
-        .join('; ');
-    }
-  }
-
-  const wrap = document.getElementById('justices-line');
-  if (wrap && justices) {
-    const limit = 140;
-    if (justices.length > limit) {
-      const short = justices.slice(0, limit).trim().replace(/[;,\s]+$/, '') + '…';
-      wrap.innerHTML = `
-        <span class="font-medium text-neutral-700">Judges present:</span>
-        <span id="justices-text">${short}</span>
-        <button id="justices-toggle" class="ml-2 underline underline-offset-2 text-neutral-600 hover:text-neutral-900">
-          Show all
-        </button>
-      `;
-      const txt = wrap.querySelector('#justices-text');
-      const btn = wrap.querySelector('#justices-toggle');
-      let expanded = false;
-      btn.addEventListener('click', () => {
-        expanded = !expanded;
-        txt.textContent = expanded ? justices : short;
-        btn.textContent = expanded ? 'Show less' : 'Show all';
-      });
-    } else {
-      wrap.innerHTML = `<span class="font-medium text-neutral-700">Judges present:</span> ${justices}`;
-    }
-  }
-});
-</script>
 </body>
 </html>
