@@ -171,22 +171,52 @@ html, body { scroll-padding-top: var(--sticky-offset); }
 </style></head>
 
 <body class="min-h-full text-neutral-900" x-init="init()">
-<header class="sticky top-0 z-40 backdrop-blur bg-white/90 border-b border-neutral-200">
-<div class="mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
-<div class="flex items-center gap-3">
-<a class="h-7 w-7 rounded-xl bg-neutral-900 text-white grid place-items-center text-xs" href="../index.html"> ILA </a>
-<div class="font-semibold tracking-tight">OPT Advisory Opinion</div>
-</div>
-<div class="flex items-center gap-2">
-<span class="text-sm text-neutral-600">Authors:</span>
-<template :key="a" x-for="a in authors">
-<button :class="isActive(a) ? 'bg-neutral-900 text-white border-neutral-900' : 'bg-white hover:bg-neutral-100 border-neutral-300 text-neutral-700'" @click="toggleAuthor(a)" class="px-2.5 py-1 rounded-full border text-sm transition">
-<span x-text="a"></span>
-</button>
-</template>
-<button @click="resetAuthors()" class="ml-2 text-sm underline text-neutral-600">Reset</button>
-</div>
-</div>
+<header id="site-header"
+        x-data="{ filtersOpen:false }"
+        class="sticky top-0 z-50 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-neutral-200">
+
+  <!-- Top row: logo + title + Filters button (mobile) -->
+  <div class="mx-auto max-w-3xl px-3 py-2 flex items-center gap-3">
+    <!-- LOGO: no squish on mobile -->
+    <a href="/" class="shrink-0">
+      <!-- swap src to your logo path -->
+      <img src="/ila-logo.svg"
+           alt="International Law Annotated"
+           class="h-7 w-auto sm:h-8 max-w-[44vw] object-contain" />
+    </a>
+
+    <!-- Title: keeps to a single line on phones -->
+    <h1 class="flex-1 text-base font-semibold leading-tight truncate sm:text-lg"
+        id="header-title">
+      <!-- If you set this text dynamically elsewhere, you can remove this fallback -->
+      Legal Consequences… Advisory Opinion (19 July 2024)
+    </h1>
+
+    <!-- Mobile-only Filters button -->
+    <button type="button"
+            class="lg:hidden inline-flex items-center gap-1 px-2 py-1 rounded-md border border-neutral-300 text-sm text-neutral-700 bg-white hover:bg-neutral-50"
+            @click="filtersOpen = true"
+            aria-label="Open filters">
+      <!-- funnel icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 5h18v2H3V5zm4 6h10v2H7v-2zm3 6h4v2h-4v-2z"/>
+      </svg>
+      <span>Filters</span>
+    </button>
+  </div>
+
+  <!-- Desktop toolbar: authors stay visible on large screens only -->
+  <div class="hidden lg:flex mx-auto max-w-3xl px-3 pb-2 gap-2 flex-wrap">
+    <!-- Reuse your existing author chips here -->
+    <!-- Expecting global AUTHORS, selectedAuthors, toggleAuthor(id) -->
+    <template x-for="author in AUTHORS" :key="author.id">
+      <button class="px-2 py-1 rounded-full border text-xs"
+              :class="selectedAuthors.includes(author.id) ? 'bg-neutral-900 text-white border-neutral-900' : 'bg-white text-neutral-700 border-neutral-300'"
+              @click="toggleAuthor(author.id)"
+              x-text="author.name">
+      </button>
+    </template>
+  </div>
 </header>
 
 
@@ -2396,6 +2426,42 @@ function jumpFirstNote(opts){
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
 })();
 </script>
+<!-- Backdrop -->
+<div x-show="$root.filtersOpen"
+     x-transition.opacity
+     class="fixed inset-0 z-[60] bg-black/40 lg:hidden"
+     @click="$root.filtersOpen = false"
+     style="display:none"></div>
+
+<!-- Bottom sheet -->
+<div x-show="$root.filtersOpen"
+     x-transition
+     class="fixed inset-x-0 bottom-0 z-[61] bg-white rounded-t-2xl shadow-2xl max-h-[85vh] lg:hidden"
+     style="display:none">
+  <div class="px-4 pt-3 pb-2 flex items-center justify-between border-b border-neutral-200">
+    <h2 class="text-sm font-semibold">Filter annotations</h2>
+    <button class="p-2 -mr-2 text-neutral-600 hover:text-neutral-900"
+            @click="$root.filtersOpen = false"
+            aria-label="Close">✕</button>
+  </div>
+
+  <div class="p-4 space-y-5 overflow-y-auto">
+    <section>
+      <h3 class="text-xs font-semibold text-neutral-500 mb-2">Authors</h3>
+      <div class="flex flex-wrap gap-2">
+        <template x-for="author in AUTHORS" :key="'m-'+author.id">
+          <button class="px-3 py-1.5 rounded-full border text-sm"
+                  :class="selectedAuthors.includes(author.id) ? 'bg-neutral-900 text-white border-neutral-900' : 'bg-white text-neutral-700 border-neutral-300'"
+                  @click="toggleAuthor(author.id)">
+            <span x-text="author.name"></span>
+          </button>
+        </template>
+      </div>
+    </section>
+
+    <!-- Add more filter sections here if you have them -->
+  </div>
+</div>
 
 </body>
 </html>
