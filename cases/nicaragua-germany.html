@@ -460,7 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const wrap = document.getElementById('justices-line');
   if (wrap && justices) {
-    const limit = 140;
+    const limit = 60;
     if (justices.length > limit) {
       const short = justices.slice(0, limit).trim().replace(/[;,\s]+$/, '') + '…';
       wrap.innerHTML = `
