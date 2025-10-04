@@ -4,8 +4,8 @@ function addNote(para, author, text, title="", source="") {
   if (!window.NOTES[para]) window.NOTES[para] = [];
   window.NOTES[para].push({ author, title, text, source });
 }
-addNote("para-2", "Jane Doe", "Test", "", "");
-addNote("para-90", "Jane Doe", "Test", "", "");
+addNote("para-94", "Jane Doe", "Test", "", "");
+addNote("para-251", "Jane Doe", "Test", "", "");
 addNote("para-92", "Oscar Pearce", "The latter half of this paragraph reflects a shift towards the 'Functional Approach' to the law of occupation, supported by the ICRC and various academic/NGO commentators. See, in particular, 'The Writing on the Wall', Aeyal Gross (CUP, 2017), and Gross's response to this opinion: https://www.google.com/search?client=safari&rls=en&q=functional+approach+lex+lata&ie=UTF-8&oe=UTF-8.", "", "");
 addNote("para-94", "Oscar Pearce", "See Tatjana Grote's Opinio Juris article for a criticism of the Court's use of 'effective control' in this paragraph. The best interpretation is that effective control still functions as an absolute threshold (a state that has effective control must comply with the entirety of the law of occupation), while the functional approach allows certain obligations to remain in place even when control dips below that threshold. See: https://opiniojuris.org/2024/09/19/the-janus-face-of-effective-control-the-icjs-approach-to-determining-the-applicability-of-the-law-of-occupation-in-gaza-after-the-israeli-withdrawal/.", "", "");
 addNote("para-229", "Oscar Pearce", "The Court's reluctance here to specify whether Israel is practicing apartheid, racial segregation, or both, has caused some confusion and debate. See: https://www.ejiltalk.org/racial-segregation-and-apartheid-in-the-icj-palestine-advisory-opinion/.", "", "");

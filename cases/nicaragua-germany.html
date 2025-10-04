@@ -190,15 +190,28 @@ html, body { scroll-padding-top: var(--sticky-offset); }
 </header>
 <main class="mx-auto max-w-5xl px-4 py-8 prose prose-neutral">
 <div class="relative">
-<div class="hidden lg:block absolute -left-8 top-0" x-data="noteMap()" x-init="init()">
-<div class="sticky top-24 h-[calc(100vh-8rem)] note-rail bg-neutral-200 rounded-full relative">
-<template :key="m.id" x-for="m in markers">
-<button :style="'top:'+m.pos+'%; opacity:'+m.opacity" :title="m.tooltip" @click="scrollTo(m.id)" class="note-dot rounded-full absolute left-1/2 -translate-x-1/2 bg-neutral-500/70 hover:bg-neutral-900 transition ring-2 ring-white z-10">
-</button>
-</template>
-<div :style="'top:'+activePos+'%'" class="absolute left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-neutral-900"></div>
-</div>
-</div>
+  <!-- Note map rail — fixed, content-aligned -->
+  <div x-data="noteMap()" x-init="init()"
+       data-note-rail
+       class="hidden lg:block fixed z-30"
+       style="top: var(--sticky-offset);">
+    <div class="note-rail bg-neutral-200 rounded-full relative"
+         style="height: calc(100vh - var(--sticky-offset) - 24px);">
+      <template x-for="m in markers" :key="m.id">
+        <button
+          class="note-dot rounded-full absolute left-1/2 -translate-x-1/2
+                 bg-neutral-500/70 hover:bg-neutral-900 transition ring-2 ring-white z-10"
+          :style="'top:'+m.pos+'%; opacity:'+m.opacity"
+          @click="scrollTo(m.id)"
+          :title="m.tooltip">
+        </button>
+      </template>
+
+      <!-- active tracker -->
+      <div class="absolute left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-neutral-900"
+           :style="'top:'+activePos+'%'"></div>
+    </div>
+  </div>
 </div>
 
 <section class="mb-8 border-b border-neutral-200 pb-5">
@@ -659,5 +672,34 @@ function jumpFirstNote(opts){
   };
 }
 </script>
+<script>
+(function positionNoteRail(){
+  var rail = document.querySelector('[data-note-rail]');
+  if (!rail) return;
+
+  function place(){
+    var main = document.querySelector('main') || document.body;
+    var r = main.getBoundingClientRect();
+    var gap = 20;                               // space between rail and content
+    var left = window.scrollX + r.left - gap - rail.offsetWidth;
+
+    // keep a minimum gutter from viewport edge
+    var minLeft = window.scrollX + 12;
+    rail.style.left = Math.max(minLeft, left) + 'px';
+  }
+
+  function ready(fn){
+    if (document.readyState === 'complete' || document.readyState === 'interactive') fn();
+    else window.addEventListener('DOMContentLoaded', fn, { once: true });
+  }
+
+  ready(place);
+  window.addEventListener('load', place);
+  window.addEventListener('resize', place);
+  window.addEventListener('noteMap:update', place);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+})();
+</script>
+
 </body>
 </html>
