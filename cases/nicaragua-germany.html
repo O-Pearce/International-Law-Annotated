@@ -15,18 +15,28 @@
     .para-id { font-variant-numeric: tabular-nums; }
     
 .note-card {
-  max-width: 380px;
+  max-width: 100%;
   background: none;
   border: none;
   padding: 0;
   box-shadow: none;
   margin-bottom: 0.5rem;
 }
+
 .tippy-box[data-theme~='light-border'] {
   background-color: #fafafa;
   border: 1px solid rgb(229 229 229);
   box-shadow: 0 4px 12px rgba(0,0,0,0.06);
   border-radius: 10px;
+  max-width: min(92vw, 420px);
+}
+.tippy-box[data-theme~='light-border'] .tippy-content {
+  max-height: 68vh;
+  overflow: auto;
+}
+@media (max-width: 380px) {
+  .tippy-box[data-theme~='light-border'] { max-width: 94vw; }
+  .tippy-box[data-theme~='light-border'] .tippy-content { max-height: 64vh; }
 }
 .tippy-box[data-theme~='light-border'] > .tippy-arrow {
   display: none !important;
@@ -76,7 +86,7 @@ function icjApp() {
       if (!filtered.length) return '<div class="text-sm text-neutral-500">No notes yet.</div>';
       return filtered.map(n => {
         let h = '';
-        h += '<div class="note-card p-3 rounded-xl bg-neutral-50 border border-neutral-200 mb-2">';
+        h += '<div class="note-card mb-2">';
         if (n.author) h += '<div class="text-[11px] tracking-wide text-neutral-600 mb-1">By ' + n.author + '</div>';
         if (n.title)  h += '<div class="font-semibold mt-0.5">' + n.title + '</div>';
         h += '<div class="text-sm leading-snug mt-1 text-neutral-700">' + (n.text || '') + '</div>';
@@ -105,17 +115,37 @@ function icjApp() {
     },
 
     refreshPopovers() {
-      this._tippies.forEach(t => t.destroy()); this._tippies = [];
-      document.querySelectorAll("[data-para]").forEach(el => {
-        const id = el.getAttribute("data-para");
-        const instance = tippy(el, {
-          allowHTML: true, trigger: 'mouseenter focus click', interactive: true,
-          maxWidth: 420, theme: 'light-border', animation: 'scale', placement: 'right-start',
-          content: () => this.htmlFor(id)
-        });
-        this._tippies.push(instance);
-      });
-    },
+  // destroy old instances
+  this._tippies.forEach(t => t.destroy());
+  this._tippies = [];
+
+  const isMobile = window.matchMedia('(max-width: 640px)').matches;
+
+  document.querySelectorAll('[data-para]').forEach(el => {
+    const id = el.getAttribute('data-para');
+
+    const instance = tippy(el, {
+      allowHTML: true,
+      interactive: true,
+      theme: 'light-border',
+      animation: 'scale',
+      appendTo: () => document.body,             // avoid clipping in narrow containers
+      placement: isMobile ? 'bottom' : 'right-start',  // NOTE: plain hyphen, not en dash
+      trigger: isMobile ? 'click' : 'mouseenter focus',
+      offset: isMobile ? [0, 8] : [6, 0],
+      hideOnClick: true,
+      content: () => this.htmlFor(id),
+      popperOptions: {
+        modifiers: [
+          { name: 'preventOverflow', options: { padding: 8, altAxis: true } },
+          { name: 'flip', options: { fallbackPlacements: ['bottom', 'top', 'right', 'left'] } }
+        ]
+      }
+    });
+
+    this._tippies.push(instance);
+  });
+},
 
     applyHighlights() {
       const allParas = Array.from(document.querySelectorAll('[id^=\"para-\"]'));
