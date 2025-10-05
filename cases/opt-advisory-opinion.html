@@ -293,18 +293,17 @@ html, body { scroll-padding-top: var(--sticky-offset); }
          style="height: calc(100vh - var(--sticky-offset) - 24px);">
       <template x-for="m in markers" :key="m.id">
         <button
-          class="note-dot rounded-full absolute left-1/2 -translate-x-1/2
-                 bg-neutral-500/70 hover:bg-neutral-900 transition ring-2 ring-white z-10"
-          :style="'top:'+m.pos+'%; opacity:'+m.opacity"
-          @click="scrollTo(m.id)"
-          :title="m.tooltip">
-        </button>
+  class="note-dot rounded-full absolute left-1/2 -translate-x-1/2
+         bg-neutral-500/70 hover:bg-neutral-900 transition ring-2 ring-white"
+  :style="`top:${m.pos}%; opacity:${m.opacity}; z-index:${10000 - (parseInt((m.id || '').replace(/[^0-9]/g, ''), 10) || 0)}`"
+  @click="scrollTo(m.id)"
+  :title="m.tooltip">
+</button>
       </template>
 
       <!-- active tracker -->
-      <div class="absolute left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-neutral-900"
-           :style="'top:'+activePos+'%'"></div>
-    </div>
+      <div class="absolute left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-neutral-900 z-[1200]"
+     :style="`top:${activePos}%`"></div>
   </div>
 </div>
 
