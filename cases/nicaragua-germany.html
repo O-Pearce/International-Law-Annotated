@@ -41,6 +41,17 @@
 .tippy-box[data-theme~='light-border'] > .tippy-arrow {
   display: none !important;
 }
+.tippy-box[data-theme~='light-border'] .tippy-content {
+  overflow-wrap: anywhere;   /* modern wrap */
+  word-break: break-word;    /* fallback */
+  white-space: normal;
+}
+
+.tippy-box[data-theme~='light-border'] a {
+  text-decoration: underline;
+  word-break: break-all;     /* allows very long URLs to wrap mid-word if needed */
+}
+
 
     .hl { background: rgba(250, 204, 21, .25); }
     .dim {
