@@ -90,6 +90,20 @@ function icjApp() {
     selectedAuthors: new Set(),
     authors: [],
 
+    linkify(text = '') {
+  // escape HTML first
+  const esc = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  // convert URLs to clickable links
+  const url = /(https?:\/\/[^\s)]+)(?=[)\s]|$)/gi;
+  return esc.replace(url, (m) =>
+    `<a href="${m}" target="_blank" rel="noopener noreferrer">${m}</a>`
+  );
+},
+
     htmlFor(id) {
       const list = (window.NOTES && window.NOTES[id]) ? window.NOTES[id] : [];
       const hasFilter = this.selectedAuthors.size > 0;
@@ -100,7 +114,9 @@ function icjApp() {
         h += '<div class="note-card mb-2">';
         if (n.author) h += '<div class="text-[11px] tracking-wide text-neutral-600 mb-1">By ' + n.author + '</div>';
         if (n.title)  h += '<div class="font-semibold mt-0.5">' + n.title + '</div>';
-        h += '<div class="text-sm leading-snug mt-1 text-neutral-700">' + (n.text || '') + '</div>';
+        h += '<div class="text-sm leading-snug mt-1 text-neutral-700" data-note-body>'
+     + this.linkify(n.text || '')
+     + '</div>';
         if (n.source) h += '<div class="text-xs mt-2 text-neutral-500">Source: ' + n.source + '</div>';
         h += '</div>';
         return h;
