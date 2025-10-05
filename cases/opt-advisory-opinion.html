@@ -13,8 +13,23 @@
 <link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
 <style>
     .para-id { font-variant-numeric: tabular-nums; }
-    .note-card { max-width: 380px }
-    .tippy-box { border-radius: 12px; }
+    .note-card {
+  max-width: 380px;
+  background: none;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  margin-bottom: 0.5rem;
+}
+.tippy-box[data-theme~='light-border'] {
+  background-color: #fafafa;
+  border: 1px solid rgb(229 229 229);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border-radius: 10px;
+}
+.tippy-box[data-theme~='light-border'] > .tippy-arrow {
+  display: none !important;
+}
     .hl { background: rgba(250, 204, 21, .25); }
     .dim {
   opacity: 0.35;                /* fades non-selected paragraphs */
