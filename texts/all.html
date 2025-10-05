@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>All Texts — International Law Annotated</title>
+  <meta name="description" content="Browse all annotated texts from the International Law Annotated project." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    .hover-lift {
+      transition: box-shadow .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .hover-lift:hover {
+      box-shadow: 0 10px 24px rgba(0,0,0,.06);
+      border-color: rgb(163 163 163);
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-white text-neutral-900">
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-white/90 border-b border-neutral-200">
+    <div class="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-2 shrink-0 text-neutral-900" aria-label="International Law Annotated">
+        <svg aria-hidden="true" viewBox="0 0 32 32" class="h-7 w-auto">
+          <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 8h6M12 24h6M12 8v16" />
+          </g>
+          <circle cx="23" cy="16" r="3" fill="currentColor"/>
+        </svg>
+        <span class="hidden sm:block font-medium tracking-tight">International Law Annotated</span>
+      </a>
+      <nav class="hidden sm:flex items-center gap-6 text-sm">
+        <a class="text-neutral-700 hover:text-neutral-900" href="../index.html#what">About</a>
+        <a class="text-neutral-700 hover:text-neutral-900" href="../index.html#contribute">Contribute</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main x-data="caseBrowser()" x-init="init()" class="max-w-7xl mx-auto px-4 py-14">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+      <h1 class="font-semibold text-3xl tracking-tight">All Texts</h1>
+      <div class="max-w-sm w-full">
+        <label class="sr-only" for="search">Search texts</label>
+        <div class="flex items-center gap-3 border border-neutral-300 rounded-full px-4 py-2.5">
+          <svg viewBox="0 0 20 20" fill="none" class="w-5 h-5 text-neutral-500" aria-hidden="true">
+            <path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="9" cy="9" r="5.5" stroke="currentColor" stroke-width="1.6"/>
+          </svg>
+          <input
+            id="search"
+            type="search"
+            placeholder="Search texts…"
+            x-model="query"
+            class="w-full bg-transparent outline-none text-[15px] placeholder:text-neutral-400"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+      <template x-for="c in filtered" :key="c.href">
+        <a :href="c.href" class="block rounded-2xl border border-neutral-200 p-5 hover-lift">
+          <div class="text-xs uppercase tracking-wider text-neutral-500 mb-1" x-text="c.subtitle"></div>
+          <h3 class="font-medium text-neutral-900 mb-1" x-html="c.title"></h3>
+          <p class="text-sm text-neutral-600" x-text="c.desc"></p>
+        </a>
+      </template>
+
+      <!-- Placeholder / invitation card -->
+      <div class="rounded-2xl border border-dashed border-neutral-300 p-5 flex items-center">
+        <p class="text-sm text-neutral-600">
+          More texts coming soon. Want to suggest one?
+          <a class="underline hover:no-underline whitespace-nowrap" href="https://forms.gle/amHbxFtxHikAEBk47">
+            Contribute an annotation&nbsp;→
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <div x-show="filtered.length === 0" class="text-center text-sm text-neutral-500 mt-10">
+      No matches found.
+    </div>
+  </main>
+
+  <!-- Alpine Data -->
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('caseBrowser', () => ({
+        query: '',
+        cases: [
+          {
+            title: 'Nicaragua v. Germany',
+            subtitle: 'ICJ — 2024',
+            desc: 'Alleged Breaches of Certain International Obligations in Respect of the Occupied Palestinian Territory.',
+            href: './nicaragua-germany.html'
+          },
+          {
+            title: 'OPT Advisory Opinion',
+            subtitle: 'ICJ — 2024',
+            desc: 'Legal Consequences Arising from the Policies and Practices of Israel in the Occupied Palestinian territory, Including East Jerusalem.',
+            href: './opt-advisory-opinion.html'
+          }
+          // Add further text entries here
+        ],
+        init() {
+          const u = new URL(window.location.href);
+          this.query = u.searchParams.get('q') || '';
+        },
+        get filtered() {
+          const q = this.query.trim().toLowerCase();
+          if (!q) return this.cases;
+          return this.cases.filter(c =>
+            (c.title + c.subtitle + c.desc).toLowerCase().includes(q)
+          );
+        }
+      }));
+    });
+  </script>
+</body>
+</html>
