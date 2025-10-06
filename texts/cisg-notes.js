@@ -51,22 +51,6 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-23": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "Note that the CISG has this bespoke interpretation regime, and does not incorporate the Parol Evidence Rule. On the latter, see CISG Advisory Council Opinion No 3: https://cisgac.com/opinions/cisgac-opinion-no-3/.",
-      "source": ""
-    }
-  ],
-  "para-24": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "Note that the CISG has this bespoke interpretation regime, and does not incorporate the Parol Evidence Rule. On the latter, see CISG Advisory Council Opinion No 3: https://cisgac.com/opinions/cisgac-opinion-no-3/.",
-      "source": ""
-    }
-  ],
   "para-29": [
     {
       "author": "Oscar Pearce",
@@ -83,125 +67,17 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-81": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion No 19 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-19/.",
-      "source": ""
-    },
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See also CISG Advisory Council Opinion No 5 for a discussion of the criteria required for non-conformity to amount to a fundamental breach creating a right of avoidance: https://cisgac.com/opinions/cisgac-opinion-no-5/.",
-      "source": ""
-    }
-  ],
   "para-77": [
     {
       "author": "Oscar Pearce",
       "title": "",
-      "text": "See CISG Advisory Council Opinion No 19 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-19/.",
+      "text": "See CISG Advisory Council Opinion No 19 for analysis of Article 35: https://cisgac.com/opinions/cisgac-opinion-no-19/.",
       "source": ""
     },
     {
       "author": "Oscar Pearce",
       "title": "",
       "text": "See also CISG Advisory Council Opinion No 5 for a discussion of the criteria required for non-conformity to amount to a fundamental breach creating a right of avoidance: https://cisgac.com/opinions/cisgac-opinion-no-5/.",
-      "source": ""
-    }
-  ],
-  "para-78": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion No 19 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-19/.",
-      "source": ""
-    },
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See also CISG Advisory Council Opinion No 5 for a discussion of the criteria required for non-conformity to amount to a fundamental breach creating a right of avoidance: https://cisgac.com/opinions/cisgac-opinion-no-5/.",
-      "source": ""
-    }
-  ],
-  "para-80": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion No 19 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-19/.",
-      "source": ""
-    },
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See also CISG Advisory Council Opinion No 5 for a discussion of the criteria required for non-conformity to amount to a fundamental breach creating a right of avoidance: https://cisgac.com/opinions/cisgac-opinion-no-5/.",
-      "source": ""
-    }
-  ],
-  "para-83": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion No 19 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-19/.",
-      "source": ""
-    },
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See also CISG Advisory Council Opinion No 5 for a discussion of the criteria required for non-conformity to amount to a fundamental breach creating a right of avoidance: https://cisgac.com/opinions/cisgac-opinion-no-5/.",
-      "source": ""
-    }
-  ],
-  "para-82": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion No 19 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-19/.",
-      "source": ""
-    },
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See also CISG Advisory Council Opinion No 5 for a discussion of the criteria required for non-conformity to amount to a fundamental breach creating a right of avoidance: https://cisgac.com/opinions/cisgac-opinion-no-5/.",
-      "source": ""
-    }
-  ],
-  "para-79": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion No 19 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-19/.",
-      "source": ""
-    },
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See also CISG Advisory Council Opinion No 5 for a discussion of the criteria required for non-conformity to amount to a fundamental breach creating a right of avoidance: https://cisgac.com/opinions/cisgac-opinion-no-5/.",
-      "source": ""
-    }
-  ],
-  "para-91": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion No 2 for analysis of these provisions: https://cisgac.com/opinions/cisgac-opinion-no-2/.",
-      "source": ""
-    }
-  ],
-  "para-87": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion No 2 for analysis of these provisions: https://cisgac.com/opinions/cisgac-opinion-no-2/.",
-      "source": ""
-    }
-  ],
-  "para-89": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion No 2 for analysis of these provisions: https://cisgac.com/opinions/cisgac-opinion-no-2/.",
       "source": ""
     }
   ],
@@ -213,11 +89,11 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-88": [
+  "para-87": [
     {
       "author": "Oscar Pearce",
       "title": "",
-      "text": "See CISG Advisory Council Opinion No 2 for analysis of these provisions: https://cisgac.com/opinions/cisgac-opinion-no-2/.",
+      "text": "See CISG Advisory Council Opinion No 2 for analysis of Articles 38 and 39: https://cisgac.com/opinions/cisgac-opinion-no-2/.",
       "source": ""
     }
   ],
@@ -229,51 +105,11 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-98": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion No 22 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-22/.",
-      "source": ""
-    }
-  ],
-  "para-97": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion No 22 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-22/.",
-      "source": ""
-    }
-  ],
-  "para-99": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion No 22 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-22/.",
-      "source": ""
-    }
-  ],
-  "para-95": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion No 22 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-22/.",
-      "source": ""
-    }
-  ],
-  "para-96": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion No 22 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-22/.",
-      "source": ""
-    }
-  ],
   "para-111": [
     {
       "author": "Oscar Pearce",
       "title": "",
-      "text": "See CISG Advisory Council Opinion No 21 for analysis of these provisions: https://cisgac.com/opinions/cisgac-opinion-no-21/.",
+      "text": "See CISG Advisory Council Opinion No 21 for analysis of repair and redelivery: https://cisgac.com/opinions/cisgac-opinion-no-21/.",
       "source": ""
     }
   ],
@@ -281,7 +117,7 @@ window.NOTES = {
     {
       "author": "Oscar Pearce",
       "title": "",
-      "text": "See CISG Advisory Council Opinion No 21 for analysis of these provisions: https://cisgac.com/opinions/cisgac-opinion-no-21/.",
+      "text": "See CISG Advisory Council Opinion No 21 for analysis of repair and redelivery: https://cisgac.com/opinions/cisgac-opinion-no-21/.",
       "source": ""
     }
   ],
@@ -290,44 +126,6 @@ window.NOTES = {
       "author": "Oscar Pearce",
       "title": "",
       "text": "See CISG Advisory Council Opinion No 5 for a discussion of the criteria required for non-conformity to amount to a fundamental breach: https://cisgac.com/opinions/cisgac-opinion-no-5/.",
-      "source": ""
-    },
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "For the effects of avoidance, see CISG Advisory Council Opinion No 9: https://cisgac.com/opinions/cisgac-opinion-no-9/.",
-      "source": ""
-    }
-  ],
-  "para-125": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "For the effects of avoidance, see CISG Advisory Council Opinion No 9: https://cisgac.com/opinions/cisgac-opinion-no-9/.",
-      "source": ""
-    }
-  ],
-  "para-123": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "For the effects of avoidance, see CISG Advisory Council Opinion No 9: https://cisgac.com/opinions/cisgac-opinion-no-9/.",
-      "source": ""
-    }
-  ],
-  "para-124": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "For the effects of avoidance, see CISG Advisory Council Opinion No 9: https://cisgac.com/opinions/cisgac-opinion-no-9/.",
-      "source": ""
-    }
-  ],
-  "para-122": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "For the effects of avoidance, see CISG Advisory Council Opinion No 9: https://cisgac.com/opinions/cisgac-opinion-no-9/.",
       "source": ""
     }
   ],
@@ -339,38 +137,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-121": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "For the effects of avoidance, see CISG Advisory Council Opinion No 9: https://cisgac.com/opinions/cisgac-opinion-no-9/.",
-      "source": ""
-    }
-  ],
-  "para-120": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "For the effects of avoidance, see CISG Advisory Council Opinion No 9: https://cisgac.com/opinions/cisgac-opinion-no-9/.",
-      "source": ""
-    }
-  ],
-  "para-142": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "Regarding documents controlling goods' disposition, see CISG Advisory Council Opinion No 11: https://cisgac.com/opinions/cisgac-opinion-no-11/.",
-      "source": ""
-    }
-  ],
-  "para-141": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "Regarding documents controlling goods' disposition, see CISG Advisory Council Opinion No 11: https://cisgac.com/opinions/cisgac-opinion-no-11/.",
-      "source": ""
-    }
-  ],
+
   "para-140": [
     {
       "author": "Oscar Pearce",
@@ -380,62 +147,6 @@ window.NOTES = {
     }
   ],
   "para-157": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "For the effects of avoidance, see CISG Advisory Council Opinion No 9: https://cisgac.com/opinions/cisgac-opinion-no-9/.",
-      "source": ""
-    }
-  ],
-  "para-158": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "For the effects of avoidance, see CISG Advisory Council Opinion No 9: https://cisgac.com/opinions/cisgac-opinion-no-9/.",
-      "source": ""
-    }
-  ],
-  "para-162": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "For the effects of avoidance, see CISG Advisory Council Opinion No 9: https://cisgac.com/opinions/cisgac-opinion-no-9/.",
-      "source": ""
-    }
-  ],
-  "para-163": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "For the effects of avoidance, see CISG Advisory Council Opinion No 9: https://cisgac.com/opinions/cisgac-opinion-no-9/.",
-      "source": ""
-    }
-  ],
-  "para-159": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "For the effects of avoidance, see CISG Advisory Council Opinion No 9: https://cisgac.com/opinions/cisgac-opinion-no-9/.",
-      "source": ""
-    }
-  ],
-  "para-161": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "For the effects of avoidance, see CISG Advisory Council Opinion No 9: https://cisgac.com/opinions/cisgac-opinion-no-9/.",
-      "source": ""
-    }
-  ],
-  "para-160": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "For the effects of avoidance, see CISG Advisory Council Opinion No 9: https://cisgac.com/opinions/cisgac-opinion-no-9/.",
-      "source": ""
-    }
-  ],
-  "para-164": [
     {
       "author": "Oscar Pearce",
       "title": "",
@@ -455,15 +166,7 @@ window.NOTES = {
     {
       "author": "Oscar Pearce",
       "title": "",
-      "text": "See CISG Advisory Council Opinion No 8 for analysis of these provisions: https://cisgac.com/opinions/cisgac-opinion-no-8/.",
-      "source": ""
-    }
-  ],
-  "para-191": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion No 8 for analysis of these provisions: https://cisgac.com/opinions/cisgac-opinion-no-8/.",
+      "text": "See CISG Advisory Council Opinion No 8 for analysis of Articles 75 and 76: https://cisgac.com/opinions/cisgac-opinion-no-8/.",
       "source": ""
     }
   ],
@@ -471,7 +174,7 @@ window.NOTES = {
     {
       "author": "Oscar Pearce",
       "title": "",
-      "text": "See CISG Advisory Council Opinion No 8 for analysis of these provisions: https://cisgac.com/opinions/cisgac-opinion-no-8/.",
+      "text": "See CISG Advisory Council Opinion No 8 for analysis of Articles 75 and 76: https://cisgac.com/opinions/cisgac-opinion-no-8/.",
       "source": ""
     }
   ],
@@ -480,54 +183,6 @@ window.NOTES = {
       "author": "Oscar Pearce",
       "title": "",
       "text": "See CISG Advisory Council Opinion No 14 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-14/.",
-      "source": ""
-    }
-  ],
-  "para-201": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion Nos 7 and 20 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-7/, https://cisgac.com/opinions/cisgac-opinion-no-20/.",
-      "source": ""
-    }
-  ],
-  "para-199": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion Nos 7 and 20 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-7/, https://cisgac.com/opinions/cisgac-opinion-no-20/.",
-      "source": ""
-    }
-  ],
-  "para-200": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion Nos 7 and 20 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-7/, https://cisgac.com/opinions/cisgac-opinion-no-20/.",
-      "source": ""
-    }
-  ],
-  "para-198": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion Nos 7 and 20 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-7/, https://cisgac.com/opinions/cisgac-opinion-no-20/.",
-      "source": ""
-    }
-  ],
-  "para-202": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion Nos 7 and 20 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-7/, https://cisgac.com/opinions/cisgac-opinion-no-20/.",
-      "source": ""
-    }
-  ],
-  "para-197": [
-    {
-      "author": "Oscar Pearce",
-      "title": "",
-      "text": "See CISG Advisory Council Opinion Nos 7 and 20 for analysis of this provision: https://cisgac.com/opinions/cisgac-opinion-no-7/, https://cisgac.com/opinions/cisgac-opinion-no-20/.",
       "source": ""
     }
   ],
