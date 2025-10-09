@@ -175,7 +175,7 @@ function icjApp() {
 },
 
     applyHighlights() {
-      const allParas = Array.from(document.querySelectorAll('[id^=\"para-\"]'));
+      const allParas = Array.from(document.querySelectorAll('[id^=\"para-\"],[data-dimmable="1"]'));
       allParas.forEach(w => w.classList.remove('hl', 'dim'));
       const allIds = allParas.map(el => el.id);
 
@@ -265,14 +265,17 @@ html, body { scroll-padding-top: var(--sticky-offset); }
     <div id="hdr-authors" class="flex items-center gap-2">
       <span class="text-sm text-neutral-600">Authors:</span>
       <template x-for="a in authors" :key="a">
-        <button
-          class="px-2.5 py-1 rounded-full border text-sm transition
-                 hover:bg-neutral-100 text-neutral-700 border-neutral-300"
-          :class="isActive(a) ? 'bg-neutral-900 text-white border-neutral-900' : ''"
-          @click="toggleAuthor(a)">
-          <span x-text="a"></span>
-        </button>
-      </template>
+  <button
+    class="px-2.5 py-1 rounded-full border text-sm transition
+           text-neutral-700 border-neutral-300"
+    :class="isActive(a)
+      ? 'bg-neutral-900 text-white border-neutral-900 hover:bg-neutral-600' 
+      : 'hover:bg-neutral-100 hover:text-neutral-900'"
+    @click="toggleAuthor(a)">
+    <span x-text="a"></span>
+  </button>
+</template>
+
     </div>
   </div>
 </header>
@@ -318,7 +321,7 @@ Alleged Breaches of Certain International Obligations in Respect of the Occupied
 </div>
 
 
-<div class="preamble legal-flow space-y-3 mb-3">
+<div data-dimmable="1" class="preamble legal-flow space-y-3 mb-3">
 <p>The International Court of Justice,</p>
 <p>Composed as above,</p>
 <p>After deliberation,</p>
@@ -479,7 +482,7 @@ Alleged Breaches of Certain International Obligations in Respect of the Occupied
 <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
 <button @click.prevent="copyLink('para-26')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-26" title="Copy link; hover/click for notes">[26]</button>
 <!-- content column -->
-<div class="leading-relaxed space-y-2">
+<div data-dimmable="1" class="leading-relaxed space-y-2">
 <p>For these reasons,</p>
 <p class="sc">THE COURT,</p>
 <p>By fifteen votes to one,</p>

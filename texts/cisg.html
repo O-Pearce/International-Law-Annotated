@@ -101,7 +101,7 @@ function icjApp() {
       });
     },
     applyHighlights() {
-      const allParas = Array.from(document.querySelectorAll('[id^="para-"]'));
+      const allParas = Array.from(document.querySelectorAll('[id^="para-"],[data-dimmable="1"]'));
       allParas.forEach(w => w.classList.remove('hl', 'dim'));
       const allIds = allParas.map(el => el.id);
       if (this.selectedAuthors.size === 0) {
@@ -208,14 +208,16 @@ function noteMap() {
     <div id="hdr-authors" class="flex items-center gap-2">
       <span class="text-sm text-neutral-600">Authors:</span>
       <template x-for="a in authors" :key="a">
-        <button
-          class="px-2.5 py-1 rounded-full border text-sm transition
-                 hover:bg-neutral-100 text-neutral-700 border-neutral-300"
-          :class="isActive(a) ? 'bg-neutral-900 text-white border-neutral-900' : ''"
-          @click="toggleAuthor(a)">
-          <span x-text="a"></span>
-        </button>
-      </template>
+  <button
+    class="px-2.5 py-1 rounded-full border text-sm transition
+           text-neutral-700 border-neutral-300"
+    :class="isActive(a)
+      ? 'bg-neutral-900 text-white border-neutral-900 hover:bg-neutral-600' 
+      : 'hover:bg-neutral-100 hover:text-neutral-900'"
+    @click="toggleAuthor(a)">
+    <span x-text="a"></span>
+  </button>
+</template>
     </div>
   </div>
 </header>
@@ -258,7 +260,7 @@ function noteMap() {
   <span>Hover or tap paragraph numbers <span class="font-semibold">[¶]</span> to view annotations.</span>
 </div>
 
-<div class="space-y-3"> <p><em>The States Parties to this Convention</em>,</p> <p><br><em>Bearing in mind</em> the broad objectives in the resolutions adopted by the
+<div data-dimmable="1" class="space-y-3"> <p><em>The States Parties to this Convention</em>,</p> <p><br><em>Bearing in mind</em> the broad objectives in the resolutions adopted by the
   sixth special session of the General Assembly of the United Nations on the
   establishment of a New International Economic Order,</p> <p><br><em>Considering</em> that the development of international trade on the basis of
   equality and mutual benefit is an important element in promoting friendly
@@ -1877,7 +1879,7 @@ function noteMap() {
     <p>The denunciation takes effect on the first day of the month following the expiration of twelve months after the notification is received by the depositary. Where a longer period for the denunciation to take effect is specified in the notification, the denunciation takes effect upon the expiration of such longer period after the notification is received by the depositary.</p>
   </div>
 </div>
-<div class="space-y-3 mt-6"> <p>DONE at Vienna, this day of eleventh day of April, one thousand nine hundred and eighty, in a single original, of which the Arabic, Chinese, English, French, Russian and Spanish texts are equally authentic.</p> <p>IN WITNESS WHEREOF the undersigned plenipotentiaries, being duly authorized by their respective Governments, have signed this Convention.</p>
+<div data-dimmable="1" class="space-y-3 mt-6"> <p>DONE at Vienna, this day of eleventh day of April, one thousand nine hundred and eighty, in a single original, of which the Arabic, Chinese, English, French, Russian and Spanish texts are equally authentic.</p> <p>IN WITNESS WHEREOF the undersigned plenipotentiaries, being duly authorized by their respective Governments, have signed this Convention.</p>
 
 </main>
 

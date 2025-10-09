@@ -173,7 +173,7 @@ function icjApp() {
 },
 
     applyHighlights() {
-      const allParas = Array.from(document.querySelectorAll('[id^=\"para-\"]'));
+      const allParas = Array.from(document.querySelectorAll('[id^=\"para-\"],[data-dimmable="1"]'));
       allParas.forEach(w => w.classList.remove('hl', 'dim'));
       const allIds = allParas.map(el => el.id);
 
@@ -263,14 +263,16 @@ html, body { scroll-padding-top: var(--sticky-offset); }
     <div id="hdr-authors" class="flex items-center gap-2">
       <span class="text-sm text-neutral-600">Authors:</span>
       <template x-for="a in authors" :key="a">
-        <button
-          class="px-2.5 py-1 rounded-full border text-sm transition
-                 hover:bg-neutral-100 text-neutral-700 border-neutral-300"
-          :class="isActive(a) ? 'bg-neutral-900 text-white border-neutral-900' : ''"
-          @click="toggleAuthor(a)">
-          <span x-text="a"></span>
-        </button>
-      </template>
+  <button
+    class="px-2.5 py-1 rounded-full border text-sm transition
+           text-neutral-700 border-neutral-300"
+    :class="isActive(a)
+      ? 'bg-neutral-900 text-white border-neutral-900 hover:bg-neutral-600' 
+      : 'hover:bg-neutral-100 hover:text-neutral-900'"
+    @click="toggleAuthor(a)">
+    <span x-text="a"></span>
+  </button>
+</template>
     </div>
   </div>
 </header>
@@ -325,7 +327,7 @@ Legal Consequences Arising from the Policies and Practices of Israel in the Occu
 
 
 
-<div class="preamble legal-flow space-y-3 mb-3">
+<div data-dimmable="1" class="preamble legal-flow space-y-3 mb-3">
   <p>On the legal consequences arising from the policies and practices of Israel in the Occupied Palestinian Territory, including East Jerusalem,</p>
 
   <p><span class="sc">The Court,</span></p>
@@ -2094,7 +2096,7 @@ Legal Consequences Arising from the Policies and Practices of Israel in the Occu
 <p>For these reasons,</p>
 </div>
 </div>
-<div class="legal-flow space-y-3">
+<div data-dimmable="1" class="legal-flow space-y-3">
 
   <p><span class="sc">The Court,</span></p>
 
