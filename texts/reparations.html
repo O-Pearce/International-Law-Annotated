@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-white" lang="en" x-data="icjApp()">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Advisory Opinion — Reparations (Annotated)</title>
+<meta content="Annotated ICJ Advisory Opinion with inline author-filtered notes." name="description"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer="" src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
+<link href="https://unpkg.com/tippy.js@6/animations/scale.css" rel="stylesheet"/>
+<style>
+    .para-id { font-variant-numeric: tabular-nums; }
+    .note-card {
+  max-width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  margin-bottom: 0.5rem;
+}
+
+.tippy-box[data-theme~='light-border'] {
+  background-color: #fafafa;
+  border: 1px solid rgb(229 229 229);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border-radius: 10px;
+  max-width: min(92vw, 420px);
+}
+.tippy-box[data-theme~='light-border'] .tippy-content {
+  max-height: 68vh;
+  overflow: auto;
+}
+@media (max-width: 380px) {
+  .tippy-box[data-theme~='light-border'] { max-width: 94vw; }
+  .tippy-box[data-theme~='light-border'] .tippy-content { max-height: 64vh; }
+}
+.tippy-box[data-theme~='light-border'] > .tippy-arrow {
+  display: none !important;
+}
+.tippy-box[data-theme~='light-border'] .tippy-content {
+  overflow-wrap: anywhere;   /* modern wrap */
+  word-break: break-word;    /* fallback */
+  white-space: normal;
+}
+
+.tippy-box[data-theme~='light-border'] a {
+  text-decoration: underline;
+  word-break: break-all;     /* allows very long URLs to wrap mid-word if needed */
+}
+
+    .hl { background: rgba(250, 204, 21, .25); }
+    .dim {
+  opacity: 0.35;                /* fades non-selected paragraphs */
+  transition: opacity 0.2s ease;
+}
+
+  .sc { font-variant: small-caps; letter-spacing: .02em; }
+  .hang { padding-left: 11ch; text-indent: -11ch; }
+  /* Classic hanging indent for numbered paragraphs like "1. ..." */
+  .hang-num { padding-left: 3ch; text-indent: -3ch; }
+
+  /* Nice readable flow + automatic hyphenation to mimic print wraps */
+  .legal-flow { line-height: 1.7; hyphens: auto; }
+
+  /* Indented preamble block (adjust ch to taste) */
+  .preamble { padding-left: 4ch; }
+  </style>
+<script defer="" src="reparations-notes.js"></script>
+<script defer="">
+  // Build AUTHORS once notes are ready
+  function computeAuthors(){
+    window.AUTHORS = Array.from(new Set(
+      Object.values(window.NOTES || {}).flat().map(n => (n.author||'').trim()).filter(Boolean)
+    )).sort();
+  }
+  if (window.NOTES && Object.keys(window.NOTES).length) { computeAuthors(); }
+  window.addEventListener('notes:ready', computeAuthors, { once: true });
+</script>
+
+<meta content="INSERT" name="justices">
+
+<script>  
+function icjApp() {
+  return {
+    selectedAuthors: new Set(),
+    authors: [],
+
+
+    linkify(text = '') {
+  // escape HTML first
+  const esc = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  // convert URLs to clickable links
+  const url = /(https?:\/\/[^\s)]+)(?=[)\s]|$)/gi;
+  return esc.replace(url, (m) =>
+    `<a href="${m}" target="_blank" rel="noopener noreferrer">${m}</a>`
+  );
+},
+
+    htmlFor(id) {
+      const list = (window.NOTES && window.NOTES[id]) ? window.NOTES[id] : [];
+      const hasFilter = this.selectedAuthors.size > 0;
+      const filtered = hasFilter ? list.filter(n => this.selectedAuthors.has((n.author || '').trim())) : list;
+      if (!filtered.length) return '<div class="text-sm text-neutral-500">No notes yet.</div>';
+      return filtered.map(n => {
+        let h = '';
+        h += '<div class="note-card mb-2">';
+        if (n.author) h += '<div class="text-[11px] tracking-wide text-neutral-600 mb-1">By ' + n.author + '</div>';
+        if (n.title)  h += '<div class="font-semibold mt-0.5">' + n.title + '</div>';
+        h += '<div class="text-sm leading-snug mt-1 text-neutral-700" data-note-body>'
+     + this.linkify(n.text || '')
+     + '</div>';        if (n.source) h += '<div class="text-xs mt-2 text-neutral-500">Source: ' + n.source + '</div>';
+        h += '</div>';
+        return h;
+      }).join('');
+    },
+
+    _tippies: [],
+
+    init() {
+      const run = () => {
+        // Pull authors from global after notes are computed
+        this.authors = Array.isArray(window.AUTHORS) ? window.AUTHORS : [];
+        this.refreshPopovers();
+        this.applyHighlights();
+        this.handleHashOnLoad();
+      };
+      if (!window.NOTES || Object.keys(window.NOTES).length === 0) {
+        const once = () => { window.removeEventListener('notes:ready', once); run(); };
+        window.addEventListener('notes:ready', once);
+      } else {
+        run();
+      }
+    },
+
+    refreshPopovers() {
+  // destroy old instances
+  this._tippies.forEach(t => t.destroy());
+  this._tippies = [];
+
+  const isMobile = window.matchMedia('(max-width: 640px)').matches;
+
+  document.querySelectorAll('[data-para]').forEach(el => {
+    const id = el.getAttribute('data-para');
+
+    const instance = tippy(el, {
+      allowHTML: true,
+      interactive: true,
+      theme: 'light-border',
+      animation: 'scale',
+      appendTo: () => document.body,             // avoid clipping in narrow containers
+      placement: isMobile ? 'bottom' : 'right-start',  // NOTE: plain hyphen, not en dash
+      trigger: isMobile ? 'click' : 'mouseenter focus',
+      offset: isMobile ? [0, 8] : [6, 0],
+      hideOnClick: true,
+      content: () => this.htmlFor(id),
+      popperOptions: {
+        modifiers: [
+          { name: 'preventOverflow', options: { padding: 8, altAxis: true } },
+          { name: 'flip', options: { fallbackPlacements: ['bottom', 'top', 'right', 'left'] } }
+        ]
+      }
+    });
+
+    this._tippies.push(instance);
+  });
+},
+
+    applyHighlights() {
+      const allParas = Array.from(document.querySelectorAll('[id^=\"para-\"],[data-dimmable="1"]'));
+      allParas.forEach(w => w.classList.remove('hl', 'dim'));
+      const allIds = allParas.map(el => el.id);
+
+      if (this.selectedAuthors.size === 0) {
+        allIds.forEach(id => {
+          const notes = (window.NOTES && window.NOTES[id]) ? window.NOTES[id] : [];
+          if (notes.length > 0) {
+            const w = document.getElementById(id);
+            if (w) w.classList.add('hl');
+          }
+        });
+        return;
+      }
+
+      allParas.forEach(w => w.classList.add('dim'));
+
+      allIds.forEach(id => {
+        const notes = (window.NOTES && window.NOTES[id]) ? window.NOTES[id] : [];
+        const hasSelected = notes.some(n => this.selectedAuthors.has((n.author || '').trim()));
+        if (hasSelected) {
+          const w = document.getElementById(id);
+          if (w) { w.classList.add('hl'); w.classList.remove('dim'); }
+        }
+      });
+    },
+
+    toggleAuthor(a) {
+      a = (a || '').trim();
+      if (this.selectedAuthors.has(a)) this.selectedAuthors.delete(a);
+      else this.selectedAuthors.add(a);
+      this.applyHighlights();
+      this.refreshPopovers();
+    },
+
+    isActive(a) { return this.selectedAuthors.has((a || '').trim()); },
+
+    copyLink(id) {
+      const url = new URL(window.location);
+      url.hash = id;
+      navigator.clipboard.writeText(url.toString());
+      const el = document.querySelector(`[data-para='${id}']`);
+      if (el) { el.classList.add('ring-2','ring-emerald-400'); setTimeout(()=>el.classList.remove('ring-2','ring-emerald-400'),800); }
+    },
+
+    handleHashOnLoad() {
+      if (location.hash) {
+        const id = location.hash.slice(1);
+        const el = document.getElementById(id);
+        if (el) { el.scrollIntoView({behavior:'smooth', block:'start'}); el.classList.add('bg-yellow-50'); setTimeout(()=>el.classList.remove('bg-yellow-50'),1200); }
+      }
+    }
+  }
+}
+
+</script>
+
+<style>:root { --sticky-offset: 80px; }
+html, body { scroll-padding-top: var(--sticky-offset); }
+.note-rail { width:6px; }
+.note-dot { width:12px; height:8px; }
+</style></head>
+
+<body class="min-h-full text-neutral-900" x-init="init()">
+<header class="sticky top-0 z-40 backdrop-blur bg-white/90 border-b border-neutral-200">
+  <div class="mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
+    <!-- add min-w-0 so the title can actually truncate -->
+    <div class="flex items-center gap-3 min-w-0">
+  <a href="../index.html"
+   class="shrink-0 text-neutral-900"
+   aria-label="International Law Annotated">
+  <!-- ILA mark: bracket with rounded arms + citation dot -->
+  <svg aria-hidden="true" viewBox="0 0 32 32" class="h-7 w-auto">
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 8h6M12 24h6M12 8v16" />
+    </g>
+    <circle cx="23" cy="16" r="3" fill="currentColor"/>
+  </svg>
+</a>
+      <!-- add flex-1 min-w-0 truncate and an id for the script -->
+      <div id="hdr-title"
+           class="font-semibold tracking-tight flex-1 min-w-0 truncate">
+        OPT Advisory Opinion
+      </div>
+    </div>
+
+    <!-- give the authors row an id; no breakpoint classes -->
+    <div id="hdr-authors" class="flex items-center gap-2">
+      <span class="text-sm text-neutral-600">Authors:</span>
+      <template x-for="a in authors" :key="a">
+  <button
+    class="px-2.5 py-1 rounded-full border text-sm transition
+           text-neutral-700 border-neutral-300"
+    :class="isActive(a)
+      ? 'bg-neutral-900 text-white border-neutral-900 hover:bg-neutral-600' 
+      : 'hover:bg-neutral-100 hover:text-neutral-900'"
+    @click="toggleAuthor(a)">
+    <span x-text="a"></span>
+  </button>
+</template>
+    </div>
+  </div>
+</header>
+
+<main class="mx-auto max-w-5xl px-4 py-8 prose prose-neutral">
+<div class="relative">
+  <!-- Note map rail — fixed, content-aligned -->
+  <div x-data="noteMap()" x-init="init()"
+       data-note-rail
+       class="hidden lg:block fixed z-30"
+       style="top: var(--sticky-offset);">
+    <div class="note-rail bg-neutral-200 rounded-full relative"
+         style="height: calc(100vh - var(--sticky-offset) - 24px);">
+      <template x-for="m in markers" :key="m.id">
+        <button
+  class="note-dot rounded-full absolute left-1/2 -translate-x-1/2
+         bg-neutral-500/70 hover:bg-neutral-900 transition ring-2 ring-white"
+  :style="`top:${m.pos}%; opacity:${m.opacity}; z-index:${10000 - (parseInt((m.id || '').replace(/[^0-9]/g, ''), 10) || 0)}`"
+  @click="scrollTo(m.id)"
+  :title="m.tooltip">
+</button>
+      </template>
+
+      <!-- active tracker -->
+      <div class="absolute left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-neutral-900 z-[1200]"
+     :style="`top:${activePos}%`"></div>
+  </div>
+</div>
+
+<section class="mb-8 border-b border-neutral-200 pb-5">
+  <div class="text-[11px] uppercase tracking-[0.22em] text-neutral-500 mb-2">
+    International Law Annotated
+  </div>
+
+  <h1 id="page-title"
+      class="text-balance font-extrabold tracking-tight leading-[1.15]
+             text-[clamp(1.6rem,3.5vw,2.75rem)]
+             md:text-[clamp(1.9rem,2.6vw,3.2rem)]
+             bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-600
+             [word-spacing:0.02em]">
+    <!-- Keep your exact title text (no casing changes) -->
+     Reparation for Injuries Suffered in the Service of the United Nations
+</h1>
+<div class="mt-3 text-sm text-neutral-600" id="justices-line"></div>
+</section>
+<div class="flex items-center justify-center gap-2 text-sm text-neutral-700 border-l-4 border-sky-400 bg-sky-50 px-3 py-2 mb-6 rounded-r-lg">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 text-sky-600">
+    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-9 4a1 1 0 102 0 1 1 0 00-2 0zm1-9a1 1 0 00-.993.883L9 6v4a1 1 0 001.993.117L11 10V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+  </svg>
+  <span>Hover or tap paragraph numbers <span class="font-semibold">[¶]</span> to view annotations.</span>
+</div>
+
+
+
+<div data-dimmable="1" class="preamble legal-flow space-y-3 mb-3">
+  <p>On the legal consequences arising from the policies and practices of Israel in the Occupied Palestinian Territory, including East Jerusalem,</p>
+
+  <p><span class="sc">The Court,</span></p>
+
+  <p>composed as above,</p>
+
+  <p><em>gives the following Advisory Opinion:</em></p>
+</div>
+
+<div class="space-y-3">
+<div id="para-1">
+<div class="grid grid-cols-[6ch_1fr] items-start gap-3">
+<button @click.prevent="copyLink('para-1')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-1" title="Copy link; hover/click for notes">[1]</button>
+<p> Insert </p>
+</div>
+</div>
+
+<div id="para-285">
+<div class="grid grid-cols-[6ch_1fr] items-start gap-3 mb-3">
+<button @click.prevent="copyLink('para-285')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-285" title="Copy link; hover/click for notes">[285]</button>
+<p>For these reasons,</p>
+</div>
+</div>
+</div>
+<div data-dimmable="1" class="legal-flow space-y-3">
+
+  <p><span class="sc">The Court,</span></p>
+
+  <p>(1) Unanimously,<br/>
+    <em>Finds</em> that it has jurisdiction to give the advisory opinion requested;
+  </p>
+
+  <p>(2) By fourteen votes to one,<br/>
+    <em>Decides</em> to comply with the request for an advisory opinion;
+  </p>
+  <p class="hang">
+    <span class="sc">IN FAVOUR:</span> <em>President</em> <span class="sc">Salam</span>; <em>Judges</em> <span class="sc">Tomka</span>, <span class="sc">Abraham</span>, <span class="sc">Yusuf</span>, <span class="sc">Xue</span>, <span class="sc">Bhandari</span>, <span class="sc">Iwasawa</span>, <span class="sc">Nolte</span>, <span class="sc">Charlesworth</span>, <span class="sc">Brant</span>, <span class="sc">Gómez Robledo</span>, <span class="sc">Cleveland</span>, <span class="sc">Aurescu</span>, <span class="sc">Tladi</span>;
+  </p>
+  <p class="hang">
+    <span class="sc">AGAINST:</span> <em>Vice-President</em> <span class="sc">Sebutinde</span>;
+  </p>
+
+  <p>(3) By eleven votes to four,<br/>
+    <em>Is of the opinion</em> that the State of Israel’s continued presence in the Occupied Palestinian Territory is unlawful;
+  </p>
+  <p class="hang">
+    <span class="sc">IN FAVOUR:</span> <em>President</em> <span class="sc">Salam</span>; <em>Judges</em> <span class="sc">Yusuf</span>, <span class="sc">Xue</span>, <span class="sc">Bhandari</span>, <span class="sc">Iwasawa</span>, <span class="sc">Nolte</span>, <span class="sc">Charlesworth</span>, <span class="sc">Brant</span>, <span class="sc">Gómez Robledo</span>, <span class="sc">Cleveland</span>, <span class="sc">Tladi</span>;
+  </p>
+  <p class="hang">
+    <span class="sc">AGAINST:</span> <em>Vice-President</em> <span class="sc">Sebutinde</span>; <em>Judges</em> <span class="sc">Tomka</span>, <span class="sc">Abraham</span>, <span class="sc">Aurescu</span>;
+  </p>
+
+  <p>(4) By eleven votes to four,<br/>
+    <em>Is of the opinion</em> that the State of Israel is under an obligation to bring to an end its unlawful presence in the Occupied Palestinian Territory as rapidly as possible;
+  </p>
+  <p class="hang">
+    <span class="sc">IN FAVOUR:</span> <em>President</em> <span class="sc">Salam</span>; <em>Judges</em> <span class="sc">Yusuf</span>, <span class="sc">Xue</span>, <span class="sc">Bhandari</span>, <span class="sc">Iwasawa</span>, <span class="sc">Nolte</span>, <span class="sc">Charlesworth</span>, <span class="sc">Brant</span>, <span class="sc">Gómez Robledo</span>, <span class="sc">Cleveland</span>, <span class="sc">Tladi</span>;
+  </p>
+  <p class="hang">
+    <span class="sc">AGAINST:</span> <em>Vice-President</em> <span class="sc">Sebutinde</span>; <em>Judges</em> <span class="sc">Tomka</span>, <span class="sc">Abraham</span>, <span class="sc">Aurescu</span>;
+  </p>
+
+  <p>(5) By fourteen votes to one,<br/>
+    <em>Is of the opinion</em> that the State of Israel is under an obligation to cease immediately all new settlement activities, and to evacuate all settlers from the Occupied Palestinian Territory;
+  </p>
+  <p class="hang">
+    <span class="sc">IN FAVOUR:</span> <em>President</em> <span class="sc">Salam</span>; <em>Judges</em> <span class="sc">Tomka</span>, <span class="sc">Abraham</span>, <span class="sc">Yusuf</span>, <span class="sc">Xue</span>, <span class="sc">Bhandari</span>, <span class="sc">Iwasawa</span>, <span class="sc">Nolte</span>, <span class="sc">Charlesworth</span>, <span class="sc">Brant</span>, <span class="sc">Gómez Robledo</span>, <span class="sc">Cleveland</span>, <span class="sc">Aurescu</span>, <span class="sc">Tladi</span>;
+  </p>
+  <p class="hang">
+    <span class="sc">AGAINST:</span> <em>Vice-President</em> <span class="sc">Sebutinde</span>;
+  </p>
+
+  <p>(6) By fourteen votes to one,<br/>
+    <em>Is of the opinion</em> that the State of Israel has the obligation to make reparation for the damage caused to all the natural or legal persons concerned in the Occupied Palestinian Territory;
+  </p>
+  <p class="hang">
+    <span class="sc">IN FAVOUR:</span> <em>President</em> <span class="sc">Salam</span>; <em>Judges</em> <span class="sc">Tomka</span>, <span class="sc">Abraham</span>, <span class="sc">Yusuf</span>, <span class="sc">Xue</span>, <span class="sc">Bhandari</span>, <span class="sc">Iwasawa</span>, <span class="sc">Nolte</span>, <span class="sc">Charlesworth</span>, <span class="sc">Brant</span>, <span class="sc">Gómez Robledo</span>, <span class="sc">Cleveland</span>, <span class="sc">Aurescu</span>, <span class="sc">Tladi</span>;
+  </p>
+  <p class="hang">
+    <span class="sc">AGAINST:</span> <em>Vice-President</em> <span class="sc">Sebutinde</span>;
+  </p>
+
+  <p>(7) By twelve votes to three,<br/>
+    <em>Is of the opinion</em> that all States are under an obligation not to recognize as legal the situation arising from the unlawful presence of the State of Israel in the Occupied Palestinian Territory and not to render aid or assistance in maintaining the situation created by the continued presence of the State of Israel in the Occupied Palestinian Territory;
+  </p>
+  <p class="hang">
+    <span class="sc">IN FAVOUR:</span> <em>President</em> <span class="sc">Salam</span>; <em>Judges</em> <span class="sc">Tomka</span>, <span class="sc">Yusuf</span>, <span class="sc">Xue</span>, <span class="sc">Bhandari</span>, <span class="sc">Iwasawa</span>, <span class="sc">Nolte</span>, <span class="sc">Charlesworth</span>, <span class="sc">Brant</span>, <span class="sc">Gómez Robledo</span>, <span class="sc">Cleveland</span>, <span class="sc">Tladi</span>;
+  </p>
+  <p class="hang">
+    <span class="sc">AGAINST:</span> <em>Vice-President</em> <span class="sc">Sebutinde</span>; <em>Judges</em> <span class="sc">Abraham</span>, <span class="sc">Aurescu</span>;
+  </p>
+
+  <p>(8) By twelve votes to three,<br/>
+    <em>Is of the opinion</em> that international organizations, including the United Nations, are under an obligation not to recognize as legal the situation arising from the unlawful presence of the State of Israel in the Occupied Palestinian Territory;
+  </p>
+  <p class="hang">
+    <span class="sc">IN FAVOUR:</span> <em>President</em> <span class="sc">Salam</span>; <em>Judges</em> <span class="sc">Tomka</span>, <span class="sc">Yusuf</span>, <span class="sc">Xue</span>, <span class="sc">Bhandari</span>, <span class="sc">Iwasawa</span>, <span class="sc">Nolte</span>, <span class="sc">Charlesworth</span>, <span class="sc">Brant</span>, <span class="sc">Gómez Robledo</span>, <span class="sc">Cleveland</span>, <span class="sc">Tladi</span>;
+  </p>
+  <p class="hang">
+    <span class="sc">AGAINST:</span> <em>Vice-President</em> <span class="sc">Sebutinde</span>; <em>Judges</em> <span class="sc">Abraham</span>, <span class="sc">Aurescu</span>;
+  </p>
+
+  <p>(9) By twelve votes to three,<br/>
+    <em>Is of the opinion</em> that the United Nations, and especially the General Assembly, which requested this opinion, and the Security Council, should consider the precise modalities and further action required to bring to an end as rapidly as possible the unlawful presence of the State of Israel in the Occupied Palestinian Territory.
+  </p>
+  <p class="hang">
+    <span class="sc">IN FAVOUR:</span> <em>President</em> <span class="sc">Salam</span>; <em>Judges</em> <span class="sc">Tomka</span>, <span class="sc">Yusuf</span>, <span class="sc">Xue</span>, <span class="sc">Bhandari</span>, <span class="sc">Iwasawa</span>, <span class="sc">Nolte</span>, <span class="sc">Charlesworth</span>, <span class="sc">Brant</span>, <span class="sc">Gómez Robledo</span>, <span class="sc">Cleveland</span>, <span class="sc">Tladi</span>;
+  </p>
+  <p class="hang">
+    <span class="sc">AGAINST:</span> <em>Vice-President</em> <span class="sc">Sebutinde</span>; <em>Judges</em> <span class="sc">Abraham</span>, <span class="sc">Aurescu</span>.
+  </p>
+
+  <p>
+    Done in English and in French, the English text being authoritative, at the Peace Palace,
+    The Hague, this nineteenth day of July, two thousand and twenty-four, in two copies, one of which
+    will be placed in the archives of the Court and the other transmitted to the Secretary-General of the
+    United Nations.
+  </p>
+
+  <div class="text-center space-y-2 mt-3">
+    <p><em>(Signed)</em> Nawaf <span class="sc">Salam</span>,<br/>President.</p>
+    <p><em>(Signed)</em> Philippe <span class="sc">Gautier</span>,<br/>Registrar.</p>
+  </div>
+
+  <p>
+    President <span class="sc">Salam</span> appends a declaration to the Advisory Opinion of the Court; Vice-President
+    <span class="sc">Sebutinde</span> appends a dissenting opinion to the Advisory Opinion of the Court; Judge
+    <span class="sc">Tomka</span> appends a declaration to the Advisory Opinion of the Court; Judges <span class="sc">Tomka</span>,
+    <span class="sc">Abraham</span> and <span class="sc">Aurescu</span> append a joint opinion to the Advisory Opinion of the Court;
+    Judge <span class="sc">Yusuf</span> appends a separate opinion to the Advisory Opinion of the Court; Judge <span class="sc">Xue</span>
+    appends a declaration to the Advisory Opinion of the Court; Judges <span class="sc">Iwasawa</span> and <span class="sc">Nolte</span>
+    append separate opinions to the Advisory Opinion of the Court; Judges <span class="sc">Nolte</span> and <span class="sc">Cleveland</span>
+    append a joint declaration to the Advisory Opinion of the Court; Judges <span class="sc">Charlesworth</span> and
+    <span class="sc">Brant</span> append declarations to the Advisory Opinion of the Court; Judges <span class="sc">Gómez Robledo</span>
+    and <span class="sc">Cleveland</span> append separate opinions to the Advisory Opinion of the Court; Judge
+    <span class="sc">Tladi</span> appends a declaration to the Advisory Opinion of the Court.
+  </p>
+
+  <div class="text-right italic space-y-1">
+    <p>(Initialled) N.S.</p>
+    <p>(Initialled) Ph.G.</p>
+  </div>
+
+  <p class="text-center">__________</p>
+</div>
+
+<hr class="my-10"/>
+<div class="text-sm text-neutral-500">
+<strong>How to read:</strong> Hover/click the <span class="px-1 py-0.5 border rounded">[¶]</span> badge for notes.
+      Use the author chips to toggle highlights and filter tooltips.
+    </div>
+</main>
+<div class="fixed right-4 bottom-4 z-40" x-cloak="" x-data="jumpFirstNote({ headerSelector: '#site-header' })" x-init="init()">
+<button @click="go()" class="px-3 py-2 rounded-full bg-neutral-900 text-white shadow hover:bg-neutral-800 transition" x-show="show" x-transition.opacity.duration.300="">
+    Jump to first annotation
+  </button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const h = document.getElementById('page-title');
+  if (h) {
+    // Keep your title exactly as authored; only tweak rhythm for very long strings
+    const len = h.textContent.trim().length;
+    if (len > 120) {
+      h.style.letterSpacing = '-0.01em';
+      h.style.lineHeight = '1.12';
+    }
+    if (len > 180) {
+      // For extremely long titles, nudge font size down slightly
+      h.style.fontSize = 'clamp(1.5rem, 3.0vw, 2.5rem)';
+    }
+  }
+
+  // ---- Justices line (meta first, then fallback list) ----
+  const meta = document.querySelector('meta[name="justices"]');
+  let justices = meta?.content?.trim();
+  if (!justices) {
+    const list = document.querySelector('#justices-present');
+    if (list) {
+      justices = Array.from(list.querySelectorAll('li'))
+        .map(li => li.textContent.trim())
+        .filter(Boolean)
+        .join('; ');
+    }
+  }
+
+  const wrap = document.getElementById('justices-line');
+  if (wrap && justices) {
+    const limit = 60;
+    if (justices.length > limit) {
+      const short = justices.slice(0, limit).trim().replace(/[;,\s]+$/, '') + '…';
+      wrap.innerHTML = `
+        <span class="font-medium text-neutral-700">Judges present:</span>
+        <span id="justices-text">${short}</span>
+        <button id="justices-toggle" class="ml-2 underline underline-offset-2 text-neutral-600 hover:text-neutral-900">
+          Show all
+        </button>
+      `;
+      const txt = wrap.querySelector('#justices-text');
+      const btn = wrap.querySelector('#justices-toggle');
+      let expanded = false;
+      btn.addEventListener('click', () => {
+        expanded = !expanded;
+        txt.textContent = expanded ? justices : short;
+        btn.textContent = expanded ? 'Show less' : 'Show all';
+      });
+    } else {
+      wrap.innerHTML = `<span class="font-medium text-neutral-700">Judges present:</span> ${justices}`;
+    }
+  }
+});
+</script>
+
+<script>
+(function(){
+  function apply() {
+    var header = document.querySelector('header.sticky') || document.getElementById('site-header') || document.querySelector('header[role="banner"]');
+    var h = header && header.offsetHeight ? header.offsetHeight : 0;
+    document.documentElement.style.setProperty('--sticky-offset', (h + 8) + 'px');
+  }
+  if (document.readyState === 'complete') apply();
+  window.addEventListener('load', apply);
+  window.addEventListener('resize', apply);
+})();
+
+function scrollToIdWithOffset(id, behavior) {
+  if (!behavior) behavior = 'smooth';
+  var el = document.getElementById(id);
+  if (!el) return;
+  var header = document.querySelector('header.sticky') || document.getElementById('site-header') || document.querySelector('header[role="banner"]');
+  var headerH = (header && header.offsetHeight ? header.offsetHeight : 0) + 8;
+  var rect = el.getBoundingClientRect();
+  var targetY = window.scrollY + rect.top - headerH;
+  window.scrollTo({ top: Math.max(0, targetY), behavior: behavior });
+}
+
+(function(){
+  function handle(){
+    var id = location.hash ? decodeURIComponent(location.hash.replace('#','')) : '';
+    if (!id) return;
+    setTimeout(function(){ scrollToIdWithOffset(id, 'auto'); }, 0);
+  }
+  window.addEventListener('load', handle);
+  window.addEventListener('hashchange', handle);
+})();
+
+(function(){
+  var orig = window.copyLink;
+  if (typeof orig === 'function') {
+    window.copyLink = function(id){
+      try { orig.apply(this, arguments); } catch(e) {}
+      try { scrollToIdWithOffset(id); } catch(e) {}
+    };
+  }
+})();
+
+(function(){
+  function tagNotedParas() {
+    var paras = document.querySelectorAll('[id^="para-"]');
+    for (var i=0; i<paras.length; i++) {
+      var el = paras[i];
+      var list = (window.NOTES && window.NOTES[el.id]) || [];
+      if (list && list.length) el.setAttribute('data-has-notes','1');
+      else el.removeAttribute('data-has-notes');
+    }
+    try { window.dispatchEvent(new Event('noteMap:update')); } catch(e) {}
+  }
+  function readyNow(){
+    return !!(window.NOTES && Object.keys(window.NOTES).length);
+  }
+  if (!readyNow()) {
+    window.addEventListener('notes:ready', tagNotedParas, { once: true });
+    var tries = 0;
+    var iv = setInterval(function(){
+      if (readyNow() || ++tries > 300) { clearInterval(iv); if (readyNow()) tagNotedParas(); }
+    }, 100);
+  } else {
+    tagNotedParas();
+  }
+})();
+
+function noteMap() {
+  function clamp(v,min,max){ return Math.min(max, Math.max(min, v)); }
+  function collectNoted(){ return document.querySelectorAll('[id^="para-"][data-has-notes="1"]'); }
+  return {
+    markers: [],
+    activePos: 0,
+    init: function(){
+      this.compute();
+      this.onScroll();
+      var self = this;
+      window.addEventListener('resize', function(){ self.compute(); });
+      window.addEventListener('scroll', function(){ self.onScroll(); }, { passive: true });
+      window.addEventListener('noteMap:update', function(){ self.compute(); });
+    },
+    compute: function(){
+      var container = document.querySelector('main') || document.body;
+      var total = container && container.scrollHeight ? container.scrollHeight : 1;
+      var noted = collectNoted();
+      var arr = [];
+      for (var i=0; i<noted.length; i++) {
+        var el = noted[i];
+        var pos = Math.min(98, Math.max(2, (el.offsetTop / total) * 100));
+        var count = (window.NOTES && window.NOTES[el.id]) ? window.NOTES[el.id].length : 1;
+        arr.push({ id: el.id, pos: pos, opacity: Math.min(1, 0.45 + count * 0.18), tooltip: '¶' + el.id.replace('para-','') + ' • ' + count + ' note' + (count>1?'s':'') });
+      }
+      this.markers = arr;
+    },
+    onScroll: function(){
+      var container = document.querySelector('main') || document.body;
+      var total = container && container.scrollHeight ? container.scrollHeight : 1;
+      var y = window.scrollY + window.innerHeight * 0.25;
+      this.activePos = Math.min(98, Math.max(2, (y / total) * 100));
+    },
+    scrollTo: function(id){ scrollToIdWithOffset(id); }
+  };
+}
+
+function jumpFirstNote(opts){
+  opts = opts || {};
+  function getHeaderOffset(){
+    var header = document.querySelector(opts.headerSelector || 'header.sticky, #site-header, header[role="banner"]');
+    var h = header && header.offsetHeight ? header.offsetHeight : 0;
+    return h + 8;
+  }
+  return {
+    show: false,
+    firstId: null,
+    firstTop: 0,
+    _blockReshow: false,
+    _raf: null,
+    init: function(){
+      var self = this;
+      function ready(){
+        var noted = document.querySelectorAll('[id^="para-"][data-has-notes="1"]');
+        if (!noted.length) return;
+        self.firstId = noted[0].id;
+        var r = noted[0].getBoundingClientRect();
+        self.firstTop = r.top + window.scrollY;
+        self.updateShow();
+        window.addEventListener('scroll', function(){ self.onScroll(); }, { passive: true });
+        window.addEventListener('resize', function(){ self.recalc(); });
+      }
+      window.addEventListener('noteMap:update', ready, { once: true });
+      if (document.querySelector('[id^="para-"][data-has-notes="1"]')) ready();
+    },
+    recalc: function(){
+      if (!this.firstId) return;
+      var el = document.getElementById(this.firstId);
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      this.firstTop = r.top + window.scrollY;
+      this.updateShow();
+    },
+    onScroll: function(){
+      var self = this;
+      if (this._raf) return;
+      this._raf = requestAnimationFrame(function(){ self.updateShow(); self._raf = null; });
+    },
+    updateShow: function(){
+      var aboveFirst = (window.scrollY + getHeaderOffset()) < (this.firstTop - 2);
+      if (this._blockReshow && aboveFirst) { this.show = false; return; }
+      this.show = aboveFirst;
+    },
+    go: function(){
+      if (!this.firstId) return;
+      this._blockReshow = true;
+      this.show = false;
+      scrollToIdWithOffset(this.firstId);
+      var self = this;
+      function check(){
+        var atOrPast = (window.scrollY + getHeaderOffset()) >= (self.firstTop - 2);
+        if (atOrPast) {
+          self._blockReshow = false;
+          window.removeEventListener('scroll', onScrollCheck);
+          clearTimeout(timer);
+        }
+      }
+      function onScrollCheck(){ requestAnimationFrame(check); }
+      window.addEventListener('scroll', onScrollCheck, { passive: true });
+      var timer = setTimeout(function(){
+        self._blockReshow = false;
+        window.removeEventListener('scroll', onScrollCheck);
+      }, 1600);
+    }
+  };
+}
+</script>
+<script>
+(function positionNoteRail(){
+  var rail = document.querySelector('[data-note-rail]');
+  if (!rail) return;
+
+  function place(){
+    var main = document.querySelector('main') || document.body;
+    var r = main.getBoundingClientRect();
+    var gap = 20;                               // space between rail and content
+    var left = window.scrollX + r.left - gap - rail.offsetWidth;
+
+    // keep a minimum gutter from viewport edge
+    var minLeft = window.scrollX + 12;
+    rail.style.left = Math.max(minLeft, left) + 'px';
+  }
+
+  function ready(fn){
+    if (document.readyState === 'complete' || document.readyState === 'interactive') fn();
+    else window.addEventListener('DOMContentLoaded', fn, { once: true });
+  }
+
+  ready(place);
+  window.addEventListener('load', place);
+  window.addEventListener('resize', place);
+  window.addEventListener('noteMap:update', place);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+})();
+</script>
+<script>
+(function dynamicAuthorsVisibility(){
+  var title   = document.getElementById('hdr-title');
+  var authors = document.getElementById('hdr-authors');
+  if (!title || !authors) return;
+
+  function update(){
+    // ensure visible for a correct measurement
+    authors.classList.remove('hidden');
+    authors.classList.add('flex');
+
+    // ellipsis/truncation detection
+    var truncated = title.scrollWidth > title.clientWidth;
+
+    // hide only if the title would truncate with authors present
+    authors.classList.toggle('hidden', truncated);
+    authors.classList.toggle('flex', !truncated);
+    authors.setAttribute('aria-hidden', truncated ? 'true' : 'false');
+  }
+
+  // run and keep in sync with layout changes
+  var raf;
+  function queued(){ if (raf) cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }
+
+  window.addEventListener('load', queued);
+  window.addEventListener('resize', queued);
+
+  // react to header/content size changes
+  if (window.ResizeObserver){
+    var ro = new ResizeObserver(queued);
+    ro.observe(document.getElementById('site-header') || document.body);
+    ro.observe(title);
+  }
+
+  // wait for fonts (width can change when fonts load)
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(queued);
+
+  // initial
+  queued();
+})();
+</script>
+</body>
+</html>
