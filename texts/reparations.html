@@ -80,8 +80,7 @@
   window.addEventListener('notes:ready', computeAuthors, { once: true });
 </script>
 
-<meta content="INSERT" name="justices">
-
+<meta content="President Basdevant; Vice-President Guerrero; Judges Alvarez, Fabela, Hackworth, Winiarski, Zoričić, De Visscher, Sir Arnold McNair, Klaestad, Badawi Pasha, Krylov, Read, Hsu Mo, Azevedo" name="justices">
 <script>  
 function icjApp() {
   return {
@@ -255,7 +254,7 @@ html, body { scroll-padding-top: var(--sticky-offset); }
       <!-- add flex-1 min-w-0 truncate and an id for the script -->
       <div id="hdr-title"
            class="font-semibold tracking-tight flex-1 min-w-0 truncate">
-        OPT Advisory Opinion
+        Reparations Advisory Opinion
       </div>
     </div>
 
@@ -334,55 +333,43 @@ html, body { scroll-padding-top: var(--sticky-offset); }
   <p>gives the following advisory opinion :</p>
 </div>
 
+
 <div class="space-y-3">
-<div id="para-1">
-<div class="grid grid-cols-[6ch_1fr] items-start gap-3">
-<button @click.prevent="copyLink('para-1')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-1" title="Copy link; hover/click for notes">¶</button>
-<p>On December 3rd, 1948, the General Assembly of the United Nations adopted the following Resolution :</p>
+  <div id="para-1">
+    <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
+      <button 
+        @click.prevent="copyLink('para-1')" 
+        class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" 
+        data-para="para-1" 
+        title="Copy link; hover/click for notes"
+      >
+        ¶
+      </button>
+
+      <p class="legal-flow">
+        On December 3rd, 1948, the General Assembly of the United Nations adopted the following Resolution :
+        <br/>
+        "Whereas the series of tragic events which have lately befallen agents of the United Nations engaged in the performance of their duties raises, with greater urgency than ever, the question of the arrangements to be made by the United Nations with a view to ensuring to its agents the fullest measure of protection in the future and ensuring that reparation be made for the injuries suffered; and
+        <br/>
+        Whereas it is highly desirable that the Secretary-General should be able to act without question as efficaciously as possible with a view to obtaining any reparation due; therefore
+        <br/>
+        The General Assembly
+        <br/>
+        Decides to submit the following legal questions to the International Court of Justice for an advisory opinion:
+        <br/>
+        '1. In the event of an agent of the United Nations in the performance of his duties suffering injury in circumstances involving the responsibility of a State, has the United Nations, as an Organization, the capacity to bring an international claim against the responsible de jure or de facto government with a view to obtaining the reparation due in respect of the damage caused (a) to the United Nations, (h) to the victim or to persons entitled through him?
+        <br/>
+        II. In the event of an affirmative reply on point 1 (b), how is action by the United Nations to be reconciled with such rights as may be possessed by the State of which the victim is a national?'
+        <br/>
+        Instructs the Secretary-General, after the Court has given its opinion, to prepare proposals in the light of that opinion, and to submit them to the General Assembly at its next regular session."
+      <br/>
+      </p>
+
+    </div>
+  </div>
 </div>
-</div>
-<div id="para-2">
-<div class="grid grid-cols-[6ch_1fr] items-start gap-3">
-<button @click.prevent="copyLink('para-2')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-2" title="Copy link; hover/click for notes">¶</button>
-<p>&quot;Whereas the series of tragic events which have lately befallen agents of the United Nations engaged in the performance of their duties raises, with greater urgency than ever, the question of the arrangements to be made by the United Nations with a view to ensuring to its agents the fullest Measure of protection in the future and ensuring that reparation be made for the injuries suffered ; and</p>
-</div>
-</div>
-<div id="para-3">
-<div class="grid grid-cols-[6ch_1fr] items-start gap-3">
-<button @click.prevent="copyLink('para-3')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-3" title="Copy link; hover/click for notes">¶</button>
-<p>Whereas it is highly desirable that the Secretary-General should be able to act without question as efficaciously as possible with a view to obtaining any reparation due ; therefore</p>
-</div>
-</div>
-<div id="para-4">
-<div class="grid grid-cols-[6ch_1fr] items-start gap-3">
-<button @click.prevent="copyLink('para-4')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-4" title="Copy link; hover/click for notes">¶</button>
-<p>The General Assembly</p>
-</div>
-</div>
-<div id="para-5">
-<div class="grid grid-cols-[6ch_1fr] items-start gap-3">
-<button @click.prevent="copyLink('para-5')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-5" title="Copy link; hover/click for notes">¶</button>
-<p>Decides to submit the following legal questions to the International Court of Justice for an advisory opinion :</p>
-</div>
-</div>
-<div id="para-6">
-<div class="grid grid-cols-[6ch_1fr] items-start gap-3">
-<button @click.prevent="copyLink('para-6')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-6" title="Copy link; hover/click for notes">¶</button>
-<p>&#x27;1. In the event of an agent of the United Nations in the performance of his duties suffering injury in circumstances involving the responsibility of a State, has the United Nations, as an Organization, the capacity to bring an international claim against the responsible de jure or de facto government with a view to obtaining the reparation due in respect of the damage caused (a) to the United Nations, (h) to the victim or to persons entitled through him ?</p>
-</div>
-</div>
-<div id="para-7">
-<div class="grid grid-cols-[6ch_1fr] items-start gap-3">
-<button @click.prevent="copyLink('para-7')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-7" title="Copy link; hover/click for notes">¶</button>
-<p>II. In the event of an affirmative reply on point 1 (b), how is action by the United Nations to be reconciled with such rights as may be possessed by the State of which the victim is a national ?&#x27;</p>
-</div>
-</div>
-<div id="para-8">
-<div class="grid grid-cols-[6ch_1fr] items-start gap-3">
-<button @click.prevent="copyLink('para-8')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-8" title="Copy link; hover/click for notes">¶</button>
-<p>Instructs the Secretary-General, after the Court has given its opinion, to prepare proposals in the light of that opinion, and to submit them to the General Assembly at its nest regular session.&quot;</p>
-</div>
-</div>
+
+
 <div id="para-9">
 <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
 <button @click.prevent="copyLink('para-9')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-9" title="Copy link; hover/click for notes">¶</button>
@@ -464,7 +451,7 @@ html, body { scroll-padding-top: var(--sticky-offset); }
 <div id="para-22">
 <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
 <button @click.prevent="copyLink('para-22')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-22" title="Copy link; hover/click for notes">¶</button>
-<p>(c) The Court understands the word &quot;agent&quot; in the most liberal sense, that is to say, any person who, whether a paid official or not, and whether permanently employed or not, has been charged by an organ of the Organization with carrying out, or helping to carry out, one of its functions�in short, any person through whom it acts.</p>
+<p>(c) The Court understands the word &quot;agent&quot; in the most liberal sense, that is to say, any person who, whether a paid official or not, and whether permanently employed or not, has been charged by an organ of the Organization with carrying out, or helping to carry out, one of its functions - in short, any person through whom it acts.</p>
 </div>
 </div>
 <div id="para-23">
@@ -524,7 +511,7 @@ html, body { scroll-padding-top: var(--sticky-offset); }
 <div id="para-32">
 <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
 <button @click.prevent="copyLink('para-32')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-32" title="Copy link; hover/click for notes">¶</button>
-<p>The Charter has not been content to make the Organization created by it merely a centre &quot;for harmonizing the actions of nations in the attainment of these common ends&quot; (Article 1, para. 3). It has equipped that centre with organs, and has given it special tasks. It has defined the position of the Members in relation to the Organization by requiring them to give it every assistance in any action undertaken by it (Article 2, para. 5), and to accept and carry out the decisions of the Security Council; by authorizing the General Assembly to make recommendations to the Members ;[p179] by giving the Organization legal capacity and privileges and immunities in the territory of each of its Members; and by providing for the conclusion of agreements between the Organization and its Members. Practice�in particular the conclusion of conventions to which the Organization is a party�has confirmed this character of the Organization, which occupies a position in certain respects in detachment from its Members, and which is under a duty to remind them, if need be, of certain obligations. It must be added that the Organization is a political body, charged with political tasks of an important character, and covering a wide field namely, the maintenance of international peace and security, the development of friendly relations among nations, and the achievement of international co-operation in the solution of problems of an economic, social, cultural or humanitarian character (Article 1) ; and in dealing with its Members it employs political means. The &quot;Convention on the Privileges and Immunities of the United Nations&quot; of 1946 creates rights and duties between each of the signatories and the Organization (see, in particular, Section 35). It is difficult to see how such a convention could operate except upon the international plane and as between parties possessing international personality.</p>
+<p>The Charter has not been content to make the Organization created by it merely a centre &quot;for harmonizing the actions of nations in the attainment of these common ends&quot; (Article 1, para. 3). It has equipped that centre with organs, and has given it special tasks. It has defined the position of the Members in relation to the Organization by requiring them to give it every assistance in any action undertaken by it (Article 2, para. 5), and to accept and carry out the decisions of the Security Council; by authorizing the General Assembly to make recommendations to the Members ;[p179] by giving the Organization legal capacity and privileges and immunities in the territory of each of its Members; and by providing for the conclusion of agreements between the Organization and its Members. Practice - in particular the conclusion of conventions to which the Organization is a party - has confirmed this character of the Organization, which occupies a position in certain respects in detachment from its Members, and which is under a duty to remind them, if need be, of certain obligations. It must be added that the Organization is a political body, charged with political tasks of an important character, and covering a wide field namely, the maintenance of international peace and security, the development of friendly relations among nations, and the achievement of international co-operation in the solution of problems of an economic, social, cultural or humanitarian character (Article 1) ; and in dealing with its Members it employs political means. The &quot;Convention on the Privileges and Immunities of the United Nations&quot; of 1946 creates rights and duties between each of the signatories and the Organization (see, in particular, Section 35). It is difficult to see how such a convention could operate except upon the international plane and as between parties possessing international personality.</p>
 </div>
 </div>
 <div id="para-33">
@@ -668,13 +655,13 @@ html, body { scroll-padding-top: var(--sticky-offset); }
 <div id="para-56">
 <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
 <button @click.prevent="copyLink('para-56')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-56" title="Copy link; hover/click for notes">¶</button>
-<p>For this purpose, the Members of the Organization have entered into certain undertakings, some of which are in the Charter and others in complementary agreements. The content of these undertakings need not be described here ; but the Court must stress the importance of the duty to render to the Organization &quot;every assistance&quot; which is accepted by the Members in Article 2, paragraph 5, of the Charter. It must be noted that the effective working of the Organization�the accomplishment of its task, and the independence and effectiveness of the work of its agents� require that these undertakings should be strictly observed. For that purpose, it is necessary that, when an infringement occurs, the Organization should be able to call upon the responsible State to remedy its default, and, in particular, to obtain from the State reparation for the damage that the default may have caused to its agent.</p>
+<p>For this purpose, the Members of the Organization have entered into certain undertakings, some of which are in the Charter and others in complementary agreements. The content of these undertakings need not be described here ; but the Court must stress the importance of the duty to render to the Organization &quot;every assistance&quot; which is accepted by the Members in Article 2, paragraph 5, of the Charter. It must be noted that the effective working of the Organization - the accomplishment of its task, and the independence and effectiveness of the work of its agents - require that these undertakings should be strictly observed. For that purpose, it is necessary that, when an infringement occurs, the Organization should be able to call upon the responsible State to remedy its default, and, in particular, to obtain from the State reparation for the damage that the default may have caused to its agent.</p>
 </div>
 </div>
 <div id="para-57">
 <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
 <button @click.prevent="copyLink('para-57')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-57" title="Copy link; hover/click for notes">¶</button>
-<p>In order that the agent may perform his duties satisfactorily, he must feel that this protection is assured to him by the Organization, and that he may count on it. To ensure the independence of the agent, and, consequently, the independent action of the Organization itself, it is essential that in performing his duties he need not have to rely on any other protection than that of the Organization (save of course for the more direct and immediate protection due from the State in whose territory he may be). In particular, lie should not have to rely on the protection of his own State. If he had to rely on that State, his independence might well be compromised, contrary to the principle applied by Article 100 of the Charter. And lastly, it is essential that�[p184] whether the agent belongs to a powerful or to a weak State; to one more affected or less affected, by the complications of international life; to one in sympathy or not in sympathy with the mission of the agent�he should know that in the performance of his duties he is under the protection of the Organization. This assurance is even more necessary when the agent is stateless.</p>
+<p>In order that the agent may perform his duties satisfactorily, he must feel that this protection is assured to him by the Organization, and that he may count on it. To ensure the independence of the agent, and, consequently, the independent action of the Organization itself, it is essential that in performing his duties he need not have to rely on any other protection than that of the Organization (save of course for the more direct and immediate protection due from the State in whose territory he may be). In particular, lie should not have to rely on the protection of his own State. If he had to rely on that State, his independence might well be compromised, contrary to the principle applied by Article 100 of the Charter. And lastly, it is essential that - [p184] whether the agent belongs to a powerful or to a weak State; to one more affected or less affected, by the complications of international life; to one in sympathy or not in sympathy with the mission of the agent - he should know that in the performance of his duties he is under the protection of the Organization. This assurance is even more necessary when the agent is stateless.</p>
 </div>
 </div>
 <div id="para-58">
@@ -884,13 +871,13 @@ html, body { scroll-padding-top: var(--sticky-offset); }
 <div id="para-92">
 <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
 <button @click.prevent="copyLink('para-92')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-92" title="Copy link; hover/click for notes">¶</button>
-<p>(Signed) Basdevant,&nbsp;<br/>President.</p>
+<p>(<em>Signed</em>) Basdevant,&nbsp;<br/>President.</p>
 </div>
 </div>
 <div id="para-93">
 <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
 <button @click.prevent="copyLink('para-93')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-93" title="Copy link; hover/click for notes">¶</button>
-<p>(Signed) E. Hambro,&nbsp;<br/>Registrar.</p>
+<p>(<em>Signed</em>) E. Hambro,&nbsp;<br/>Registrar.</p>
 </div>
 </div>
 <div id="para-94">
@@ -914,19 +901,13 @@ html, body { scroll-padding-top: var(--sticky-offset); }
 <div id="para-97">
 <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
 <button @click.prevent="copyLink('para-97')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-97" title="Copy link; hover/click for notes">¶</button>
-<p>(Initialled) J. B.&nbsp;</p>
+<p>(<em>Initialled</em>)) J. B.&nbsp;</p>
 </div>
 </div>
 <div id="para-98">
 <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
 <button @click.prevent="copyLink('para-98')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-98" title="Copy link; hover/click for notes">¶</button>
-<p>(Initialled) E. H.</p>
-</div>
-</div>
-<div id="para-99">
-<div class="grid grid-cols-[6ch_1fr] items-start gap-3">
-<button @click.prevent="copyLink('para-99')" class="para-id text-center shrink-0 w-full mt-1 px-2 py-0.5 rounded-md border text-xs text-neutral-700 bg-white hover:bg-neutral-50" data-para="para-99" title="Copy link; hover/click for notes">¶</button>
-<p>[p190]</p>
+<p>(<em>Initialled</em>) E. H.</p>
 </div>
 </div>
 </div><hr class="my-10"/>
