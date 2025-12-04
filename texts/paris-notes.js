@@ -1,5 +1,35 @@
 window.NOTES = {
-  "para-7": [
+  "para-5": [
+    {
+      "author": "Shreya Maknoor",
+      "title": "",
+      "text": "These principles are more contextual in Paris rather than being part of a goal. Regarding the CBDRRC, there was a great Global North-Global South divide on this issue as the latter wanted a greater reflection of the balance of responsibilities by tying Paris more directly to the UNFCCC so that the UNFCCC’s annexes were included. Meanwhile, the Global North in general wanted to do away with the rigid annex system, with no annexes being in Paris.",
+      "source": ""
+    },
+    {
+      "author": "Shreya Maknoor",
+      "title": "",
+      "text": "This phrase was lifted from the Lima-Paris Action Agenda, following intense negotiations during the Durban Platform regarding the CBDRRC principle’s relevance in Paris after the Bali Action Plan eroded Kyoto’s approach to differentiation. Ultimately, within Lima the US and China compromised on this phrase which gave more flexibility on how differentiation would be applied, moving it beyond the typical Global North-Global South divide.",
+      "source": ""
+    }
+  ],
+  "para-17": [
+    {
+      "author": "Shreya Maknoor",
+      "title": "",
+      "text": "This is the most significant portion of the preamble as it was a landmark acknowledgement of human rights’ overlap with climate change, both in the effects of climate change but also in climate action. Some parties wanted human right concerns to be in an operative provision, but its only reference is in the preamble. The OHCHR also wanted this reference to say states should ‘fulfil’ their human rights obligations and not only consider human rights when “taking action” but also when assessing climate change’s long-term effect. \nThis reference also arguably stops short in not explicitly stating whether human rights considerations should be accounted for in mitigation and/or adaptation responses. It also does not encourage states from stopping other states’ interference with rights. The reference also underlines “respective” obligations, hence not creating new human rights obligations.\nFor more on the relevance of human rights to climate change see pages 296-327 of Bodansky’s International Climate Change Law (https://watermark02.silverchair.com/law-9780199664290-chapter-9.pdf token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL9Cf3qfKAc485ysgAAA5gwggOUBgkqhkiG9w0BBwagggOFMIIDgQIBADCCA3oGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQM_vLJGyfET5yUfoY8AgEQgIIDS4Mh1r331DArNZBYl5oODDz-)",
+      "source": ""
+    }
+  ],
+  "para-9": [
+    {
+      "author": "Shreya Maknoor",
+      "title": "",
+      "text": "Paris did not define developed and developing states because economies in transitions wanted to be considered developing so that they had less obligations.",
+      "source": ""
+    }
+  ],
+  "para-31": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -7,7 +37,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-12": [
+  "para-36": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -15,7 +45,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-13": [
+  "para-37": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -35,7 +65,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-11": [
+  "para-35": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -43,7 +73,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-15": [
+  "para-39": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -51,7 +81,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-19": [
+  "para-43": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -59,7 +89,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-24": [
+  "para-48": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -67,7 +97,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-35": [
+  "para-59": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -75,7 +105,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-38": [
+  "para-62": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -83,7 +113,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-53": [
+  "para-77": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -91,7 +121,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-67": [
+  "para-91": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -99,7 +129,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-85": [
+  "para-109": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -107,7 +137,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-98": [
+  "para-122": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -115,7 +145,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-123": [
+  "para-147": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -129,7 +159,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-146": [
+  "para-170": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -137,7 +167,15 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-182": [
+  "para-171": [
+    {
+      "author": "Shreya Maknoor",
+      "title": "",
+      "text": "The implementation and compliance mechanism are much weaker in Paris than they were in Kyoto. However, the EU and AOSIS succeeded in the reference to promoting compliance, making Paris’s provision stronger than it otherwise would have been.",
+      "source": ""
+    }
+  ],
+  "para-206": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -146,4 +184,10 @@ window.NOTES = {
     }
   ]
 };
-window.dispatchEvent(new Event('notes:ready'));
+window.NOTES_READY = true;
+
+try {
+  window.dispatchEvent(new Event('notes:ready'));
+  if (typeof window.tagNotedParas === 'function') window.tagNotedParas();
+  if (typeof window.noteMap === 'function') window.noteMap();
+} catch (e) {}

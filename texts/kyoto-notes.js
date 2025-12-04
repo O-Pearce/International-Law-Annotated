@@ -1,5 +1,13 @@
 window.NOTES = {
-  "para-10": [
+  "para-6": [
+    {
+      "author": "Shreya Maknoor",
+      "title": "",
+      "text": "Unlike Paris and its’ Durban Platform, the Berlin Mandate had predetermined most of Kyoto’s central characteristics. Specifically, it decided that Kyoto would be a treaty focused on mitigation with a top-down approach and internationally-negotiated emission targets that would only focus on Annex I parties’ commitments. This made Kyoto negotiations only have to decide on how stringent the targets would be and how flexible the implementation of its obligations would be. The pre-determination of the Berlin Mandate thus gave parties more time to consider issues of implementation and compliance.",
+      "source": ""
+    }
+  ],
+  "para-17": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -7,7 +15,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-15": [
+  "para-22": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -15,7 +23,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-24": [
+  "para-31": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -41,7 +49,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-25": [
+  "para-32": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -49,7 +57,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-26": [
+  "para-33": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -57,7 +65,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-27": [
+  "para-34": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -71,7 +79,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-40": [
+  "para-47": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -79,7 +87,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-42": [
+  "para-49": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -87,7 +95,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-52": [
+  "para-59": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -95,7 +103,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-57": [
+  "para-64": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -103,7 +111,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-66": [
+  "para-73": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -111,7 +119,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-77": [
+  "para-84": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -131,7 +139,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-80": [
+  "para-87": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -139,7 +147,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-94": [
+  "para-101": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -147,7 +155,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-96": [
+  "para-103": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -155,7 +163,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-97": [
+  "para-104": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -169,7 +177,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-102": [
+  "para-109": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -183,7 +191,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-105": [
+  "para-112": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -191,7 +199,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-108": [
+  "para-115": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -199,7 +207,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-135": [
+  "para-142": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -207,7 +215,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-136": [
+  "para-143": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -221,7 +229,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-137": [
+  "para-144": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -229,7 +237,7 @@ window.NOTES = {
       "source": ""
     }
   ],
-  "para-162": [
+  "para-169": [
     {
       "author": "Shreya Maknoor",
       "title": "",
@@ -238,4 +246,10 @@ window.NOTES = {
     }
   ]
 };
-window.dispatchEvent(new Event('notes:ready'));
+window.NOTES_READY = true;
+
+try {
+  window.dispatchEvent(new Event('notes:ready'));
+  if (typeof window.tagNotedParas === 'function') window.tagNotedParas();
+  if (typeof window.noteMap === 'function') window.noteMap();
+} catch (e) {}
