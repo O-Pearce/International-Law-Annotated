@@ -246,7 +246,6 @@ window.NOTES = {
     }
   ]
 };
-window.NOTES_READY = true;
 
 try {
   window.dispatchEvent(new Event('notes:ready'));
