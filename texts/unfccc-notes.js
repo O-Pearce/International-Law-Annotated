@@ -15,7 +15,7 @@ window.NOTES = {
     {
       "author": "Shreya Maknoor",
       "title": "",
-      "text": "Deciding categorisation between developed and developing had 3 different propositions. One was objective criteria (such as per capita income), a second was making lists explicitly detailing which states had certain commitments, or a combination of the two. Ultimately, the Annex system (Annex I being EITS, OECD, etc. while Annex II were specifically OECD Annex I countries and) adopted the list system.However, the UNFCCC does not explicitly define developed and developing states.",
+      "text": "Deciding categorisation between developed and developing had 3 different propositions. One was objective criteria (such as per capita income), a second was making lists explicitly detailing which states had certain commitments, or a combination of the two. Ultimately, the Annex system (Annex I being EITS, OECD, etc. while Annex II were specifically OECD Annex I countries and) adopted the list system. However, the UNFCCC does not explicitly define developed and developing states.",
       "source": ""
     }
   ],
@@ -37,7 +37,7 @@ window.NOTES = {
     {
       "author": "Shreya Maknoor",
       "title": "",
-      "text": "These principles give a general framework for the climate regime’s development, benchmarks for proposals to be measured by.Most developing countries wanted such an article to guide implementation and development of agreement. In fact, some wanted the UNFCCC to just be principles with future protocols having commitmentsMeanwhile, developed countries were against principles. For example, the US said it would muddy what the legal status of the UNFCCC was. They said non-binding principles which gave aims or interpretive context should just be in the preamble, while commitments would be in the convention’s articles. However, this critique did not consider principles as legal standards which were more general than commitments without specific obligations.Ultimately, while the principles article inclusion was a win for developing states, the US successfully got their legal implications to be watered down while developed states got certain principles to go to the preamble or be omitted.",
+      "text": "These principles give a general framework for the climate regime’s development, benchmarks for proposals to be measured by. Most developing countries wanted such an article to guide implementation and development of agreement. In fact, some wanted the UNFCCC to just be principles with future protocols having commitments. Meanwhile, developed countries were against principles. For example, the US said it would muddy what the legal status of the UNFCCC was. They said non-binding principles which gave aims or interpretive context should just be in the preamble, while commitments would be in the convention’s articles. However, this critique did not consider principles as legal standards which were more general than commitments without specific obligations. Ultimately, while the principles article inclusion was a win for developing states, the US successfully got their legal implications to be watered down while developed states got certain principles to go to the preamble or be omitted.",
       "source": ""
     },
     {
@@ -51,7 +51,7 @@ window.NOTES = {
     {
       "author": "Shreya Maknoor",
       "title": "",
-      "text": "Art 3.4 was a compromise between developed and developing states’ contrasting proposals. Developing states wanted this to be declared an “inalienable human right” giving everyone “an equal right in matters relating to reasonable living standards”. The US opposed this because its vagueness could have allowed developing countries to demand financial assistance by developed countries. Meanwhile, developed states proposed a duty to aim for sustainable development. Developing states opposed this so that sustainability would not conditionalise their financial assistance.",
+      "text": "Art 3.4 was a compromise between developed and developing states’ contrasting proposals. Developing states wanted this to be declared an “inalienable human right” giving everyone “an equal right in matters relating to reasonable living standards”. The US opposed this because its vagueness could have allowed developing countries to demand financial assistance by developed countries. Meanwhile, developed states proposed a duty to aim for sustainable development. Developing states opposed this so that sustainability would not conditionalise their financial assistance.",
       "source": ""
     }
   ],
@@ -83,7 +83,7 @@ window.NOTES = {
     {
       "author": "Shreya Maknoor",
       "title": "",
-      "text": "Most adaptation work is done through COP. Examples are of the Marrakesh COP which adopted the LDC work programme. COP12 where the Nairobi Work Programme was adopted, and COP16 where the Cancun Adaptation Framework was adopted.",
+      "text": "Most adaptation work is done through COP. Examples are of the Marrakesh COP which adopted the LDC work programme. COP12 where the Nairobi Work Programme was adopted, and COP16 where the Cancun Adaptation Framework was adopted.",
       "source": ""
     }
   ],
@@ -317,9 +317,11 @@ window.NOTES = {
     {
       "author": "Shreya Maknoor",
       "title": "",
-      "text": "The Annex lists are considered imperfect, having been fairly rushed. For example, Israel and SA were arguably developed states at the time of the UNFCCC’s creation but are not Annex I states. Meanwhile, Türkiye was in both Annexes because of their OECD membership but was arguably a developing states. At the time of the UNFCCC’s adoption, the lists’ imperfection were considered a minor issue because the Annex I/Annex II states had relatively small obligations. Moreover, the annexes were revisable after a 3/4 majority vote (Art 16.2) and COP was supposed to review annexes at end of 1998 to make appropriate adjustments (Art 4.2(f)). But in reality, the annexes actually have not changed much with many non-Annex I countries being richer per capita than some poor Annex I countries. They changed when the EU expanded to Cybrus and Malta, but Singapore, despite its wealth, was never added to Annex I because non-Annex I states lobbied hard against it.",
+      "text": "The Annex lists are considered imperfect, having been fairly rushed. For example, Israel and SA were arguably developed states at the time of the UNFCCC’s creation but are not Annex I states. Meanwhile, Türkiye was in both Annexes because of their OECD membership but was arguably a developing states. At the time of the UNFCCC’s adoption, the lists’ imperfection were considered a minor issue because the Annex I/Annex II states had relatively small obligations. Moreover, the annexes were revisable after a 3/4 majority vote (Art 16.2) and COP was supposed to review annexes at end of 1998 to make appropriate adjustments (Art 4.2(f)). But in reality, the annexes actually have not changed much with many non-Annex I countries being richer per capita than some poor Annex I countries. They changed when the EU expanded to Cyprus and Malta, but Singapore, despite its wealth, was never added to Annex I because non-Annex I states lobbied hard against it.",
       "source": ""
     }
   ]
 };
+console.log('UNFCCC NOTES ready; keys =', Object.keys(window.NOTES));
+
 window.dispatchEvent(new Event('notes:ready'));

@@ -153,6 +153,8 @@ function noteMap() {
       var container = document.querySelector('main') || document.body;
       var total = container && container.scrollHeight ? container.scrollHeight : 1;
       var noted = collectNoted(); var arr=[];
+        console.log('noteMap.compute: noted elements =', noted.length);
+
       for (var i=0;i<noted.length;i++){ var el=noted[i]; var pos = Math.min(98, Math.max(2, (el.offsetTop / total) * 100));
         var count = (window.NOTES && window.NOTES[el.id]) ? window.NOTES[el.id].length : 1;
         arr.push({ id: el.id, pos: pos, opacity: Math.min(1, 0.45 + count * 0.18), tooltip: '¶' + el.id.replace('para-','') + ' • ' + count + ' note' + (count>1?'s':'') });
@@ -168,9 +170,20 @@ function noteMap() {
 (function tagNotedParas(){
   function tag() {
     var paras = document.querySelectorAll('[id^="para-"]');
-    for (var i=0;i<paras.length;i++){ var el=paras[i]; var list=(window.NOTES && window.NOTES[el.id])||[]; if (list && list.length) el.setAttribute('data-has-notes','1'); else el.removeAttribute('data-has-notes'); }
-    try { window.dispatchEvent(new Event('noteMap:update')); } catch(e) {}
+console.log('tagNotedParas: found', paras.length, 'paras; NOTES keys =', Object.keys(window.NOTES || {}));
+
+    for (var i=0;i<paras.length;i++) {
+      var el   = paras[i];
+      var list = (window.NOTES && window.NOTES[el.id]) || [];
+      if (list && list.length) {
+        el.setAttribute('data-has-notes','1');
+        console.log('tagging', el.id, 'with', list.length, 'notes');
+      } else {
+        el.removeAttribute('data-has-notes');
+      }  
+      try { window.dispatchEvent(new Event('noteMap:update')); } catch(e) {}
   }
+    }
   function readyNow(){ return !!(window.NOTES && Object.keys(window.NOTES).length); }
   if (!readyNow()) { window.addEventListener('notes:ready', tag, { once:true });
     var tries=0; var iv=setInterval(function(){ if (readyNow() || ++tries > 300) { clearInterval(iv); if (readyNow()) tag(); } }, 100);
@@ -2447,7 +2460,7 @@ function noteMap() {
     <p>Australia</p>
   </div>
 </div>
-<div id="para-243">
+<div id="para-2430">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-243')"
@@ -2457,7 +2470,7 @@ function noteMap() {
     <p>Austria</p>
   </div>
 </div>
-<div id="para-243">
+<div id="para-2431">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-243')"
@@ -2477,7 +2490,7 @@ function noteMap() {
     <p>Belgium</p>
   </div>
 </div>
-<div id="para-244">
+<div id="para-2440">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-244')"
@@ -2487,7 +2500,7 @@ function noteMap() {
     <p>Bulgaria (a)</p>
   </div>
 </div>
-<div id="para-244">
+<div id="para-2441">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-244')"
@@ -2527,7 +2540,7 @@ function noteMap() {
     <p>European Economic Community</p>
   </div>
 </div>
-<div id="para-247">
+<div id="para-2470">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-247')"
@@ -2547,7 +2560,7 @@ function noteMap() {
     <p>Finland</p>
   </div>
 </div>
-<div id="para-248">
+<div id="para-2480">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-248')"
@@ -2557,7 +2570,7 @@ function noteMap() {
     <p>France</p>
   </div>
 </div>
-<div id="para-248">
+<div id="para-2481">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-248')"
@@ -2567,7 +2580,7 @@ function noteMap() {
     <p>Germany</p>
   </div>
 </div>
-<div id="para-248">
+<div id="para-2482">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-248')"
@@ -2597,7 +2610,7 @@ function noteMap() {
     <p>Iceland</p>
   </div>
 </div>
-<div id="para-250">
+<div id="para-2500">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-250')"
@@ -2607,7 +2620,7 @@ function noteMap() {
     <p>Ireland</p>
   </div>
 </div>
-<div id="para-250">
+<div id="para-2501">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-250')"
@@ -2627,7 +2640,7 @@ function noteMap() {
     <p>Japan</p>
   </div>
 </div>
-<div id="para-251">
+<div id="para-2510">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-251')"
@@ -2637,7 +2650,7 @@ function noteMap() {
     <p>Latvia (a)</p>
   </div>
 </div>
-<div id="para-251">
+<div id="para-2511">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-251')"
@@ -2667,7 +2680,7 @@ function noteMap() {
     <p>Netherlands</p>
   </div>
 </div>
-<div id="para-253">
+<div id="para-2530">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-253')"
@@ -2677,7 +2690,7 @@ function noteMap() {
     <p>New Zealand</p>
   </div>
 </div>
-<div id="para-253">
+<div id="para-2531">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-253')"
@@ -2707,7 +2720,7 @@ function noteMap() {
     <p>Portugal</p>
   </div>
 </div>
-<div id="para-255">
+<div id="para-2550">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-255')"
@@ -2737,7 +2750,7 @@ function noteMap() {
     <p>Spain</p>
   </div>
 </div>
-<div id="para-257">
+<div id="para-2570">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-257')"
@@ -2747,7 +2760,7 @@ function noteMap() {
     <p>Sweden</p>
   </div>
 </div>
-<div id="para-257">
+<div id="para-2571">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-257')"
@@ -2757,7 +2770,7 @@ function noteMap() {
     <p>Switzerland</p>
   </div>
 </div>
-<div id="para-257">
+<div id="para-2572">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-257')"
@@ -2818,7 +2831,7 @@ function noteMap() {
     <p>Australia</p>
   </div>
 </div>
-<div id="para-262">
+<div id="para-2620">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-262')"
@@ -2828,7 +2841,7 @@ function noteMap() {
     <p>Austria</p>
   </div>
 </div>
-<div id="para-262">
+<div id="para-2621">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-262')"
@@ -2838,7 +2851,7 @@ function noteMap() {
     <p>Belgium</p>
   </div>
 </div>
-<div id="para-262">
+<div id="para-2622">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-262')"
@@ -2848,7 +2861,7 @@ function noteMap() {
     <p>Canada</p>
   </div>
 </div>
-<div id="para-262">
+<div id="para-2623">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-262')"
@@ -2868,7 +2881,7 @@ function noteMap() {
     <p>European Economic Community</p>
   </div>
 </div>
-<div id="para-263">
+<div id="para-2630">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-263')"
@@ -2888,7 +2901,7 @@ function noteMap() {
     <p>France</p>
   </div>
 </div>
-<div id="para-264">
+<div id="para-2640">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-264')"
@@ -2898,7 +2911,7 @@ function noteMap() {
     <p>Germany</p>
   </div>
 </div>
-<div id="para-264">
+<div id="para-2641">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-264')"
@@ -2908,7 +2921,7 @@ function noteMap() {
     <p>Greece</p>
   </div>
 </div>
-<div id="para-264">
+<div id="para-2642">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-264')"
@@ -2918,7 +2931,7 @@ function noteMap() {
     <p>Iceland</p>
   </div>
 </div>
-<div id="para-264">
+<div id="para-2643">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-264')"
@@ -2928,7 +2941,7 @@ function noteMap() {
     <p>Ireland</p>
   </div>
 </div>
-<div id="para-264">
+<div id="para-2644">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-264')"
@@ -2938,7 +2951,7 @@ function noteMap() {
     <p>Italy</p>
   </div>
 </div>
-<div id="para-264">
+<div id="para-2645">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-264')"
@@ -2948,7 +2961,7 @@ function noteMap() {
     <p>Japan</p>
   </div>
 </div>
-<div id="para-264">
+<div id="para-2646">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-264')"
@@ -2968,7 +2981,7 @@ function noteMap() {
     <p>Netherlands</p>
   </div>
 </div>
-<div id="para-265">
+<div id="para-2650">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-265')"
@@ -2977,7 +2990,7 @@ function noteMap() {
       title="Copy link; hover/click for notes">¶</button>
     <p>New Zealand</p>
   </div>
-</div><div id="para-265">
+</div><div id="para-2651">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-265')"
@@ -2986,7 +2999,7 @@ function noteMap() {
       title="Copy link; hover/click for notes">¶</button>
     <p>Norway</p>
   </div>
-</div><div id="para-265">
+</div><div id="para-2652">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-265')"
@@ -2995,7 +3008,7 @@ function noteMap() {
       title="Copy link; hover/click for notes">¶</button>
     <p>Portugal</p>
   </div>
-</div><div id="para-265">
+</div><div id="para-2653">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-265')"
@@ -3004,7 +3017,7 @@ function noteMap() {
       title="Copy link; hover/click for notes">¶</button>
     <p>Spain</p>
   </div>
-</div><div id="para-265">
+</div><div id="para-2654">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-265')"
@@ -3013,7 +3026,7 @@ function noteMap() {
       title="Copy link; hover/click for notes">¶</button>
     <p>Sweden</p>
   </div>
-</div><div id="para-265">
+</div><div id="para-2655">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-265')"
@@ -3022,7 +3035,7 @@ function noteMap() {
       title="Copy link; hover/click for notes">¶</button>
     <p>Switzerland</p>
   </div>
-</div><div id="para-265">
+</div><div id="para-2656">
   <div class="grid grid-cols-[6ch_1fr] items-start gap-3">
     <button
       @click.prevent="copyLink('para-265')"
