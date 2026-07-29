@@ -6,226 +6,309 @@
   <title>International Law Annotated</title>
   <meta name="description" content="A collaborative platform where scholars and practitioners unpack international law — paragraph by paragraph." />
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
   <style>
-    /* Focus ring */
-    .focus-ring { outline: none; }
-    .focus-ring:focus-visible { box-shadow: 0 0 0 3px rgba(59,130,246,.35); }
-
-    /* Soft hover for cards */
-    .hover-lift { transition: box-shadow .2s ease, border-color .2s ease, transform .2s ease; }
-    .hover-lift:hover { box-shadow: 0 10px 24px rgba(0,0,0,.06); border-color: rgb(163 163 163); transform: translateY(-1px); }
-
-    /* Hero treatment: underline + dot (stable version) */
-    .annot-bracket {
-      position: relative;
-      display: inline-block;
-      text-decoration: underline;
-      text-decoration-color: rgb(23 23 23);
-      text-decoration-thickness: 2px;
-      text-underline-offset: 0.18em;
+    :root {
+      --paper: #F7F5EF;
+      --paper-card: #FDFCF9;
+      --ink: #1C2233;
+      --ink-soft: #565C6E;
+      --ink-faint: #8B8F9C;
+      --rule: #DDD6C4;
+      --annot: #A3341F;
+      --annot-soft: #C6684F;
+      --seal: #8A6D1C;
     }
-    .annot-bracket::after {
+
+    body { background: var(--paper); color: var(--ink); }
+
+    .font-display { font-family: "Source Serif 4", Georgia, serif; }
+    .font-ui { font-family: "IBM Plex Sans", system-ui, sans-serif; }
+    .font-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+    .font-hand { font-family: "Caveat", cursive; }
+
+    .focus-ring { outline: none; }
+    .focus-ring:focus-visible { box-shadow: 0 0 0 3px rgba(163,52,31,.35); border-radius: 2px; }
+
+    /* Card lift + margin flag on hover */
+    .case-card { transition: box-shadow .25s ease, border-color .25s ease, transform .25s ease; position: relative; }
+    .case-card::before {
+      content: "";
+      position: absolute; left: 0; top: 0.9rem; bottom: 0.9rem; width: 3px;
+      background: var(--annot); transform: scaleY(0); transform-origin: top;
+      transition: transform .25s ease;
+    }
+    .case-card:hover { box-shadow: 0 14px 30px rgba(28,34,51,.08); border-color: var(--ink-faint); transform: translateY(-2px); }
+    .case-card:hover::before { transform: scaleY(1); }
+    .case-card .read-more { opacity: 0; transform: translateX(-4px); transition: opacity .2s ease, transform .2s ease; }
+    .case-card:hover .read-more { opacity: 1; transform: translateX(0); }
+
+    /* Editorial bracket around a phrase */
+    .bracket {
+      position: relative;
+      padding: 0 .12em;
+    }
+    .bracket::before, .bracket::after {
       content: "";
       position: absolute;
-      right: -0.55rem;
-      bottom: 0.1em;
-      width: 6px; height: 6px;
-      background: rgb(23 23 23);
-      border-radius: 9999px;
+      top: -0.08em; bottom: -0.02em;
+      width: 0.16em;
+      border: 2px solid var(--annot);
+    }
+    .bracket::before { left: -0.32em; border-right: none; }
+    .bracket::after { right: -0.32em; border-left: none; }
+
+    /* Margin note connector */
+    .margin-note { position: relative; }
+    .margin-note .lead {
+      display: inline-block; width: 1.6rem; height: 1px; background: var(--annot);
+      vertical-align: middle; margin-right: .5rem;
+    }
+
+    .btn-primary {
+      background: var(--ink); color: var(--paper);
+      font-family: "IBM Plex Sans", sans-serif;
+    }
+    .btn-primary:hover { background: #2A3145; }
+    .btn-secondary {
+      border: 1px solid var(--rule); color: var(--ink);
+      font-family: "IBM Plex Sans", sans-serif;
+    }
+    .btn-secondary:hover { border-color: var(--ink); background: var(--paper-card); }
+
+    .seal {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 1.9rem; height: 1.9rem; border-radius: 9999px; border: 1.5px solid var(--ink);
+      flex-shrink: 0;
+    }
+
+    @keyframes riseIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .rise-in { animation: riseIn .7s ease both; }
+    .rise-in-1 { animation-delay: .05s; }
+    .rise-in-2 { animation-delay: .15s; }
+    .rise-in-3 { animation-delay: .25s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rise-in, .rise-in-1, .rise-in-2, .rise-in-3 { animation: none; }
+      .case-card, .case-card::before, .case-card .read-more { transition: none; }
     }
   </style>
 </head>
 
-<body class="min-h-screen bg-white text-neutral-900">
+<body class="min-h-screen font-ui">
   <!-- Header -->
-  <header class="sticky top-0 z-40 bg-white/90 border-b border-neutral-200">
+  <header class="sticky top-0 z-40 bg-[var(--paper)]/92 backdrop-blur border-b border-[var(--rule)]">
     <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
-      <a href="./" class="flex items-center gap-3 shrink-0 text-neutral-900" aria-label="International Law Annotated">
-        <!-- ILA mark -->
-        <svg aria-hidden="true" viewBox="0 0 32 32" class="h-7 w-auto">
-          <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 8h6M12 24h6M12 8v16" />
-          </g>
-          <circle cx="23" cy="16" r="3" fill="currentColor"/>
-        </svg>
-        <span class="font-medium tracking-tight">International Law Annotated</span>
+      <a href="./" class="flex items-center gap-3 shrink-0" style="color: var(--ink);" aria-label="International Law Annotated">
+        <span class="seal" aria-hidden="true">
+          <span class="font-display" style="color: var(--annot); font-size: 1.05rem; line-height: 1;">¶</span>
+        </span>
+        <span class="font-display font-medium tracking-tight text-[17px]">International Law Annotated</span>
       </a>
 
-      <nav class="hidden sm:flex items-center gap-6 text-sm">
-        <a class="text-neutral-700 hover:text-neutral-900 focus-ring" href="#what">About</a>
-        <a class="text-neutral-700 hover:text-neutral-900 focus-ring" href="./texts/all.html">Texts</a>
-        <a class="text-neutral-700 hover:text-neutral-900 focus-ring" href="#contribute">Contribute</a>
+      <nav class="hidden sm:flex items-center gap-7 text-[13px] uppercase tracking-wide font-ui">
+        <a class="text-[var(--ink-soft)] hover:text-[var(--ink)] focus-ring transition-colors" href="#what">About</a>
+        <a class="text-[var(--ink-soft)] hover:text-[var(--ink)] focus-ring transition-colors" href="./texts/all.html">Texts</a>
+        <a class="text-[var(--ink-soft)] hover:text-[var(--ink)] focus-ring transition-colors" href="#contribute">Contribute</a>
       </nav>
     </div>
   </header>
 
   <main>
     <!-- Hero -->
-    <section class="text-center py-16 md:py-20 px-4">
-      <h1 class="font-extrabold tracking-tight text-[clamp(2rem,6vw,4rem)] leading-tight text-balance">
-        International Law <span class="annot-bracket">Annotated</span>
-      </h1>
+    <section class="relative px-4 pt-16 pb-20 md:pt-24 md:pb-28 overflow-hidden">
+      <div class="mx-auto max-w-6xl grid md:grid-cols-12 gap-8 items-start">
+        <div class="md:col-span-8 rise-in rise-in-1">
+          <p class="font-mono text-[12px] uppercase tracking-[0.18em] mb-5" style="color: var(--annot);">
+            §&nbsp; a living commentary on public international law
+          </p>
+          <h1 class="font-display font-semibold tracking-tight text-[clamp(2.2rem,6vw,4.1rem)] leading-[1.06] text-balance">
+            International law,<br class="hidden sm:block" />
+            <span class="bracket">annotated</span> clause by clause.
+          </h1>
 
-      <p class="max-w-2xl mx-auto mt-5 text-lg text-neutral-600 leading-relaxed">
-        A collaborative platform where scholars and practitioners unpack international law —
-        <span class="whitespace-nowrap">paragraph by paragraph.</span>
-      </p>
+          <p class="max-w-xl mt-6 text-[17px] leading-relaxed" style="color: var(--ink-soft);">
+            A collaborative platform where scholars and practitioners unpack international law —
+            paragraph by paragraph, citation by citation.
+          </p>
 
-      <div class="mt-8 flex flex-wrap justify-center gap-4">
-        <a href="./texts/all.html"
-           class="px-6 py-3 rounded-full bg-neutral-900 text-white font-medium hover:bg-neutral-800 focus-ring">
-          Explore texts
-        </a>
-        <a href="#contribute"
-           class="px-6 py-3 rounded-full border border-neutral-300 text-neutral-700 font-medium hover:bg-neutral-50 focus-ring">
-          Contribute annotations
-        </a>
-      </div>
+          <div class="mt-9 flex flex-wrap gap-4">
+            <a href="./texts/all.html"
+               class="btn-primary px-6 py-3 text-sm font-medium focus-ring transition-colors">
+              Explore texts
+            </a>
+            <a href="#contribute"
+               class="btn-secondary px-6 py-3 text-sm font-medium focus-ring transition-colors">
+              Contribute an annotation
+            </a>
+          </div>
 
-      <!-- Simple search form (redirects to browse-all page) -->
-      <form action="./texts/all.html" method="get" class="max-w-2xl mx-auto mt-8">
-        <label class="sr-only" for="q">Search texts</label>
-        <div class="flex items-center gap-3 border border-neutral-300 rounded-full px-4 py-2.5">
-          <svg viewBox="0 0 20 20" fill="none" class="w-5 h-5 text-neutral-500" aria-hidden="true">
-            <path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-            <circle cx="9" cy="9" r="5.5" stroke="currentColor" stroke-width="1.6"/>
-          </svg>
-          <input id="q" name="q" type="search" placeholder="Search texts…"
-                 class="w-full bg-transparent outline-none text-[15px] placeholder:text-neutral-400" />
+          <!-- Search -->
+          <form action="./texts/all.html" method="get" class="max-w-xl mt-10">
+            <label class="sr-only" for="q">Search texts</label>
+            <div class="flex items-center gap-3 border border-[var(--rule)] bg-[var(--paper-card)] px-4 py-3 focus-within:border-[var(--ink)] transition-colors">
+              <svg viewBox="0 0 20 20" fill="none" class="w-4 h-4 shrink-0" style="color: var(--ink-faint);" aria-hidden="true">
+                <path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                <circle cx="9" cy="9" r="5.5" stroke="currentColor" stroke-width="1.6"/>
+              </svg>
+              <input id="q" name="q" type="search" placeholder="Search e.g. “Nicaragua v Germany” or “Art. 38”"
+                     class="w-full bg-transparent outline-none text-[14px] font-mono placeholder:text-[var(--ink-faint)]" />
+            </div>
+          </form>
         </div>
-        <p class="mt-3 text-center text-sm text-neutral-500">Press Enter to search all texts</p>
-      </form>
+
+        <!-- Margin note -->
+        <div class="md:col-span-4 md:pt-24 rise-in rise-in-2">
+          <div class="margin-note max-w-[220px] md:ml-auto">
+            <p class="font-hand text-[22px] leading-snug" style="color: var(--annot-soft);">
+              <span class="lead"></span>open access, no paywalls — built for the whole profession
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- About / Purpose -->
-    <section id="what" class="border-t border-neutral-200">
-      <div class="mx-auto max-w-3xl px-4 py-12">
-        <h2 class="font-semibold text-2xl mb-3">What is International Law Annotated?</h2>
-        <p class="text-neutral-700 mb-3">
-          We’re building a global, open-access layer of commentary on key international legal texts. Each page embeds
-          concise, scholarly context alongside specific paragraphs.
-        </p>
-        <p class="text-neutral-700 mb-3">
-          The goal is clarity and cross-referencing: to make international law more navigable for
-          students, practitioners, and researchers alike.
-        </p>
-        <p class="text-neutral-700">
-          Readers should, however, exercise care - annotations have not been thoroughly peer-reviewed.
-        </p>
+    <section id="what" class="border-t" style="border-color: var(--rule);">
+      <div class="mx-auto max-w-4xl px-4 py-16 md:py-20">
+        <div class="grid md:grid-cols-12 gap-8">
+          <div class="md:col-span-4">
+            <p class="font-mono text-[12px] uppercase tracking-[0.18em]" style="color: var(--annot);">Our approach</p>
+            <h2 class="font-display font-semibold text-2xl md:text-3xl mt-2 leading-tight">
+              What is International Law Annotated?
+            </h2>
+          </div>
+          <div class="md:col-span-8">
+            <p class="text-[16px] leading-relaxed mb-4" style="color: var(--ink-soft);">
+              We're building a global, open-access layer of commentary on key international legal texts.
+              Each page embeds concise, scholarly context alongside specific paragraphs.
+            </p>
+            <p class="text-[16px] leading-relaxed mb-4" style="color: var(--ink-soft);">
+              The goal is clarity and cross-referencing: to make international law more navigable for
+              students, practitioners, and researchers alike.
+            </p>
+            <p class="text-[16px] leading-relaxed" style="color: var(--ink-soft);">
+              Readers should, however, exercise care — annotations have not been thoroughly peer-reviewed.
+            </p>
 
-        <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-5 text-sm text-neutral-700">
-          <div class="rounded-xl border border-neutral-200 p-4 hover-lift">
-            <div class="font-semibold text-neutral-900 mb-1">Scholarly</div>
-            Curated and cited by contributors with public international law expertise.
-          </div>
-          <div class="rounded-xl border border-neutral-200 p-4 hover-lift">
-            <div class="font-semibold text-neutral-900 mb-1">Open</div>
-            Built for the community — no paywalls, no permissions.
-          </div>
-          <div class="rounded-xl border border-neutral-200 p-4 hover-lift">
-            <div class="font-semibold text-neutral-900 mb-1">Precise</div>
-            Paragraph-level insights grounded in the source text.
+            <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div>
+                <p class="font-mono text-[13px] mb-1.5" style="color: var(--annot);">[a]</p>
+                <p class="font-ui font-medium text-[15px] mb-1">Scholarly</p>
+                <p class="text-[14px] leading-relaxed" style="color: var(--ink-soft);">Curated and cited by contributors with public international law expertise.</p>
+              </div>
+              <div>
+                <p class="font-mono text-[13px] mb-1.5" style="color: var(--annot);">[b]</p>
+                <p class="font-ui font-medium text-[15px] mb-1">Open</p>
+                <p class="text-[14px] leading-relaxed" style="color: var(--ink-soft);">Built for the community — no paywalls, no permissions.</p>
+              </div>
+              <div>
+                <p class="font-mono text-[13px] mb-1.5" style="color: var(--annot);">[c]</p>
+                <p class="font-ui font-medium text-[15px] mb-1">Precise</p>
+                <p class="text-[14px] leading-relaxed" style="color: var(--ink-soft);">Paragraph-level insights grounded in the source text.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Featured Texts -->
-    <section id="texts" class="border-t border-neutral-200">
-      <div class="mx-auto max-w-7xl px-4 py-14">
-        <div class="flex items-end justify-between gap-4 mb-6">
-          <h2 class="font-semibold text-2xl">Featured texts</h2>
-          <a href="./texts/all.html" class="text-sm text-neutral-600 hover:text-neutral-900 focus-ring">Browse all</a>
+    <section id="texts" class="border-t" style="border-color: var(--rule);">
+      <div class="mx-auto max-w-7xl px-4 py-16 md:py-20">
+        <div class="flex items-end justify-between gap-4 mb-10">
+          <div>
+            <p class="font-mono text-[12px] uppercase tracking-[0.18em] mb-2" style="color: var(--annot);">The archive</p>
+            <h2 class="font-display font-semibold text-2xl md:text-3xl">Featured texts</h2>
+          </div>
+          <a href="./texts/all.html" class="text-sm font-medium hover:underline focus-ring shrink-0" style="color: var(--ink-soft);">Browse all →</a>
         </div>
 
-        <div class="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
           <!-- Card 1 -->
           <a href="./texts/nicaragua-germany.html"
-             class="block rounded-2xl border border-neutral-200 p-5 hover-lift">
-            <div class="text-xs uppercase tracking-wider text-neutral-500 mb-1">ICJ — 2024</div>
-            <h3 class="font-medium text-neutral-900 mb-1">Nicaragua v Germany</h3>
-            <p class="text-sm text-neutral-600">
+             class="case-card block border border-[var(--rule)] bg-[var(--paper-card)] p-5 pl-6 focus-ring">
+            <div class="font-mono text-[11px] uppercase tracking-wider mb-2" style="color: var(--ink-faint);">ICJ &middot; 2024</div>
+            <h3 class="font-display font-medium text-[17px] mb-1.5">Nicaragua v Germany</h3>
+            <p class="text-[13.5px] leading-relaxed mb-3" style="color: var(--ink-soft);">
               Alleged Breaches of Certain International Obligations in Respect of the Occupied Palestinian Territory
             </p>
+            <span class="read-more font-mono text-[12px]" style="color: var(--annot);">Read annotations →</span>
           </a>
 
           <!-- Card 2 -->
           <a href="./texts/opt-advisory-opinion.html"
-             class="block rounded-2xl border border-neutral-200 p-5 hover-lift">
-            <div class="text-xs uppercase tracking-wider text-neutral-500 mb-1">ICJ — 2024</div>
-            <h3 class="font-medium text-neutral-900 mb-1">
-              OPT Advisory Opinion
-            </h3>
-            <p class="text-sm text-neutral-600">
+             class="case-card block border border-[var(--rule)] bg-[var(--paper-card)] p-5 pl-6 focus-ring">
+            <div class="font-mono text-[11px] uppercase tracking-wider mb-2" style="color: var(--ink-faint);">ICJ &middot; 2024</div>
+            <h3 class="font-display font-medium text-[17px] mb-1.5">OPT Advisory Opinion</h3>
+            <p class="text-[13.5px] leading-relaxed mb-3" style="color: var(--ink-soft);">
               Legal Consequences Arising from the Policies and Practices of Israel in the Occupied Palestinian territory, Including East Jerusalem
             </p>
+            <span class="read-more font-mono text-[12px]" style="color: var(--annot);">Read annotations →</span>
           </a>
 
           <!-- Card 5 -->
-           <a href="./texts/paris.html"
-             class="block rounded-2xl border border-neutral-200 p-5 hover-lift">
-            <div class="text-xs uppercase tracking-wider text-neutral-500 mb-1">United Nations – 2015</div>
-            <h3 class="font-medium text-neutral-900 mb-1">
-              Paris Agreement
-            </h3>
-            <p class="text-sm text-neutral-600">
+          <a href="./texts/paris.html"
+             class="case-card block border border-[var(--rule)] bg-[var(--paper-card)] p-5 pl-6 focus-ring">
+            <div class="font-mono text-[11px] uppercase tracking-wider mb-2" style="color: var(--ink-faint);">United Nations &middot; 2015</div>
+            <h3 class="font-display font-medium text-[17px] mb-1.5">Paris Agreement</h3>
+            <p class="text-[13.5px] leading-relaxed mb-3" style="color: var(--ink-soft);">
               Paris Agreement Under the United Nations Framework Convention on Climate Change
             </p>
+            <span class="read-more font-mono text-[12px]" style="color: var(--annot);">Read annotations →</span>
           </a>
 
           <!-- Card 6 -->
-           <a href="./texts/kyoto.html"
-             class="block rounded-2xl border border-neutral-200 p-5 hover-lift">
-            <div class="text-xs uppercase tracking-wider text-neutral-500 mb-1">United Nations – 1998</div>
-            <h3 class="font-medium text-neutral-900 mb-1">
-              Kyoto Protocol
-            </h3>
-            <p class="text-sm text-neutral-600">
+          <a href="./texts/kyoto.html"
+             class="case-card block border border-[var(--rule)] bg-[var(--paper-card)] p-5 pl-6 focus-ring">
+            <div class="font-mono text-[11px] uppercase tracking-wider mb-2" style="color: var(--ink-faint);">United Nations &middot; 1998</div>
+            <h3 class="font-display font-medium text-[17px] mb-1.5">Kyoto Protocol</h3>
+            <p class="text-[13.5px] leading-relaxed mb-3" style="color: var(--ink-soft);">
               Kyoto Protocol to the United Nations Framework Convention on Climate Change
             </p>
+            <span class="read-more font-mono text-[12px]" style="color: var(--annot);">Read annotations →</span>
           </a>
 
           <!-- Card 7 -->
-           <a href="./texts/unfccc.html"
-             class="block rounded-2xl border border-neutral-200 p-5 hover-lift">
-            <div class="text-xs uppercase tracking-wider text-neutral-500 mb-1">United Nations – 1992</div>
-            <h3 class="font-medium text-neutral-900 mb-1">
-              UNFCCC
-            </h3>
-            <p class="text-sm text-neutral-600">
+          <a href="./texts/unfccc.html"
+             class="case-card block border border-[var(--rule)] bg-[var(--paper-card)] p-5 pl-6 focus-ring">
+            <div class="font-mono text-[11px] uppercase tracking-wider mb-2" style="color: var(--ink-faint);">United Nations &middot; 1992</div>
+            <h3 class="font-display font-medium text-[17px] mb-1.5">UNFCCC</h3>
+            <p class="text-[13.5px] leading-relaxed mb-3" style="color: var(--ink-soft);">
               United Nations Framework Convention on Climate Change
             </p>
+            <span class="read-more font-mono text-[12px]" style="color: var(--annot);">Read annotations →</span>
           </a>
 
           <!-- Card 3 -->
-           <a href="./texts/cisg.html"
-             class="block rounded-2xl border border-neutral-200 p-5 hover-lift">
-            <div class="text-xs uppercase tracking-wider text-neutral-500 mb-1">United Nations — 1980</div>
-            <h3 class="font-medium text-neutral-900 mb-1">
-              CISG
-            </h3>
-            <p class="text-sm text-neutral-600">
+          <a href="./texts/cisg.html"
+             class="case-card block border border-[var(--rule)] bg-[var(--paper-card)] p-5 pl-6 focus-ring">
+            <div class="font-mono text-[11px] uppercase tracking-wider mb-2" style="color: var(--ink-faint);">United Nations &middot; 1980</div>
+            <h3 class="font-display font-medium text-[17px] mb-1.5">CISG</h3>
+            <p class="text-[13.5px] leading-relaxed mb-3" style="color: var(--ink-soft);">
               Convention on Contracts for the International Sale of Goods
             </p>
+            <span class="read-more font-mono text-[12px]" style="color: var(--annot);">Read annotations →</span>
           </a>
 
           <!-- Card 4 -->
-           <a href="./texts/reparations.html"
-             class="block rounded-2xl border border-neutral-200 p-5 hover-lift">
-            <div class="text-xs uppercase tracking-wider text-neutral-500 mb-1">ICJ — 1949</div>
-            <h3 class="font-medium text-neutral-900 mb-1">
-              Reparations Advisory Opinion
-            </h3>
-            <p class="text-sm text-neutral-600">
+          <a href="./texts/reparations.html"
+             class="case-card block border border-[var(--rule)] bg-[var(--paper-card)] p-5 pl-6 focus-ring">
+            <div class="font-mono text-[11px] uppercase tracking-wider mb-2" style="color: var(--ink-faint);">ICJ &middot; 1949</div>
+            <h3 class="font-display font-medium text-[17px] mb-1.5">Reparations Advisory Opinion</h3>
+            <p class="text-[13.5px] leading-relaxed mb-3" style="color: var(--ink-soft);">
               Reparation for Injuries Suffered in the Service of the United Nations
             </p>
+            <span class="read-more font-mono text-[12px]" style="color: var(--annot);">Read annotations →</span>
           </a>
 
           <!-- Placeholder for future additions -->
-          <div class="rounded-2xl border border-dashed border-neutral-300 p-5 flex items-center">
-            <p class="text-sm text-neutral-600">
+          <div class="border border-dashed p-5 pl-6 flex items-center" style="border-color: var(--rule);">
+            <p class="text-[13.5px] leading-relaxed" style="color: var(--ink-soft);">
               More texts coming soon. Want to suggest one?
-              <a class="underline hover:no-underline" href="https://forms.gle/amHbxFtxHikAEBk47">Contribute an annotation&nbsp;→</a>
+              <a class="underline hover:no-underline" style="color: var(--annot);" href="https://forms.gle/amHbxFtxHikAEBk47">Contribute an annotation&nbsp;→</a>
             </p>
           </div>
         </div>
@@ -233,25 +316,38 @@
     </section>
 
     <!-- Contribute CTA -->
-    <section id="contribute" class="border-t border-neutral-200">
-      <div class="mx-auto max-w-3xl px-4 py-14 text-center">
-        <h2 class="font-semibold text-2xl">Contribute</h2>
-        <p class="max-w-2xl mx-auto mt-3 text-neutral-700">
+    <section id="contribute" class="border-t" style="border-color: var(--rule);">
+      <div class="mx-auto max-w-2xl px-4 py-16 md:py-20 text-center">
+        <p class="font-mono text-[12px] uppercase tracking-[0.18em] mb-3" style="color: var(--annot);">Join the margin</p>
+        <h2 class="font-display font-semibold text-2xl md:text-3xl">Contribute</h2>
+        <p class="max-w-xl mx-auto mt-4 text-[16px] leading-relaxed" style="color: var(--ink-soft);">
           All practitioners, academics, and advanced students are welcome. Keep annotations short, cited, and
-          focused on the specific paragraph. We’ll review for clarity and tone.
+          focused on the specific paragraph. We'll review for clarity and tone.
         </p>
-        <div class="mt-6 flex flex-wrap justify-center gap-4">
+        <div class="mt-8 flex flex-wrap justify-center gap-4">
           <a href="https://forms.gle/amHbxFtxHikAEBk47"
-             class="px-6 py-3 rounded-full bg-neutral-900 text-white font-medium hover:bg-neutral-800 focus-ring">
+             class="btn-primary px-6 py-3 text-sm font-medium focus-ring transition-colors">
             Become a contributor
           </a>
           <a href="mailto:oscar.pearce@anu.edu.au"
-             class="px-6 py-3 rounded-full border border-neutral-300 text-neutral-700 font-medium hover:bg-neutral-50 focus-ring">
+             class="btn-secondary px-6 py-3 text-sm font-medium focus-ring transition-colors">
             Contact the editors
           </a>
         </div>
       </div>
     </section>
   </main>
+
+  <footer class="border-t" style="border-color: var(--rule);">
+    <div class="mx-auto max-w-7xl px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2.5">
+        <span class="seal" style="width:1.5rem; height:1.5rem;" aria-hidden="true">
+          <span class="font-display" style="color: var(--annot); font-size: .85rem; line-height: 1;">¶</span>
+        </span>
+        <span class="font-mono text-[12px]" style="color: var(--ink-faint);">International Law Annotated</span>
+      </div>
+      <p class="font-mono text-[12px]" style="color: var(--ink-faint);">Open access &middot; unaffiliated &middot; not legal advice</p>
+    </div>
+  </footer>
 </body>
 </html>
